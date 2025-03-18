@@ -1,0 +1,37 @@
+:root {
+  --primary: #f5a623;
+  --secondary: #4a90e2;
+  --background: #ffffff;
+  --highlight: #7f8c8d; /* Para textos y detalles. */
+  --action: #e74c3c; /* Para botones y alertas. */
+}
+
+.main {
+  width: 700px;
+  align-items: center;
+  margin: auto;
+}
+
+.navbar {
+  background-color: var(--secondary);
+
+  display: flex;
+  justify-content: center;
+}
+
+.navbar__url {
+  font-size: 30px;
+  row-gap: 20px;
+  color: var(--action);
+}
+
+.footer {
+  background-color: var(--primary);
+  
+  height: 20px;
+  
+  
+}
+.footer__text{
+    text-align: center;
+}
