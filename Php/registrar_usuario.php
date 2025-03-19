@@ -1,5 +1,10 @@
 <?php
 
+// Habilitar CORS para permitir solicitudes de cualquier origen
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Methods: GET, OPTIONS");
+
 // Recibir las variables
 $username = $_GET["username"];
 $nombre = $_GET["nombre"];
