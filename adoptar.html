@@ -57,6 +57,7 @@
             <p class='gato-item-text'><strong>Personalidad: </strong>${gato.id_personalidad}</p>
             <p class='gato-item-text'><strong>Raza: </strong>${gato.id_raza}</p>
             <p class='gato-item-text'><strong>Refugio: </strong>${gato.id_refugio}</p>
+            <button onclick="PerfilGato(${gato.id_gato})">Ver perfil</button>
             </div>
 
             `;
@@ -66,6 +67,11 @@
         console.error("Error al obtener datos:", error);
       }
     });
+
+    function PerfilGato(id_gato) {
+      //window.location.href=`perfil_gato.html?id_gato=${id_gato}`;
+      window.location.href = `perfil_gato.html?id_gato=${id_gato}`;
+    }
   </script>
   <script src="Js/navbarScript.js"></script>
 </body>
