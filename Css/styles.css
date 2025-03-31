@@ -95,6 +95,12 @@ h3 {
   color: var(--action);
 }
 
+.dataContainer {
+  width: auto;
+  height: auto;
+  background-color: var(--action);
+}
+
 .footer {
   background-color: var(--primary);
 
@@ -102,4 +108,8 @@ h3 {
 }
 .footer__text {
   text-align: center;
+}
+
+.gato-item{
+  color: black;
 }
