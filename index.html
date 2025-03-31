@@ -1,30 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
-  <header>
-    <title>Adopta Gatitos</title>
-    <link rel="stylesheet" href="Css/styles.css" />
-    <link rel="stylesheet" href="Css/normalize.css" />
+<header>
+  <title>Adopta Gatitos</title>
+  <link rel="stylesheet" href="Css/styles.css" />
+  <link rel="stylesheet" href="Css/normalize.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&family=Staatliches&display=swap"
-      rel="stylesheet"
-    />
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&family=Staatliches&display=swap"
+    rel="stylesheet" />
+  <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     /> -->
-  </header>
+</header>
 
-  <body class="contenedor">
-    <p>Adopta Gatitos</p>
-    <p>Este es un plataforma para adoptar gatitos Bv</p>
+<body class="contenedor">
+  <p>Adopta Gatitos</p>
+  <p>Este es un plataforma para adoptar gatitos Bv</p>
 
-    <p>Kakakakakaka</p>
-    <div id="navbarContainer"></div>
+  <p>Kakakakakaka</p>
+  <div id="navbarContainer"></div>
+  <div id="mainContainer">
     <h3>registrar</h3>
     <form id="registroForm" method="get">
       <ul>
@@ -59,37 +58,39 @@
       </ul>
       <button type="submit">registrar</button>
     </form>
+  </div>
+  <script>
+    document
+      .getElementById("registroForm")
+      .addEventListener("submit", async function (event) {
+        event.preventDefault(); // Evita que la página se recargue
 
-    <script>
-      document
-        .getElementById("registroForm")
-        .addEventListener("submit", async function (event) {
-          event.preventDefault(); // Evita que la página se recargue
+        const formData = new FormData(this);
+        const params = new URLSearchParams(formData).toString(); // Convierte los datos a formato URL
+        const url = `https://kuramadev.com/adopta_gatitos/Php/registrar_usuario.php?${params}`;
 
-          const formData = new FormData(this);
-          const params = new URLSearchParams(formData).toString(); // Convierte los datos a formato URL
-          const url = `https://kuramadev.com/adopta_gatitos/Php/registrar_usuario.php?${params}`;
+        //console.log("URL generada:", url); // Verifica que la URL sea correcta
 
-          //console.log("URL generada:", url); // Verifica que la URL sea correcta
+        try {
+          const response = await fetch(url, { method: "GET", mode: "cors" });
 
-          try {
-            const response = await fetch(url, { method: "GET", mode: "cors" });
+          const text = await response.text();
 
-            const text = await response.text();
+          const result = JSON.parse(text); // Parsea manualmente para evitar errores
+          alert(result.success || result.error); // Muestra respuesta del servidor
+        } catch (error) {
+          console.error("Error al enviar el formulario", error);
+          alert("Hubo un error al enviar los datos");
+        }
+      });
+  </script>
+  <script src="Js/navbarScript.js"></script>
+  </div>
+</body>
+<footer class="footer">
+  <p class="footer__text">
+    &copy; 2025 Adopta Gatitos. Todos los derechos reservados.
+  </p>
+</footer>
 
-            const result = JSON.parse(text); // Parsea manualmente para evitar errores
-            alert(result.success || result.error); // Muestra respuesta del servidor
-          } catch (error) {
-            console.error("Error al enviar el formulario", error);
-            alert("Hubo un error al enviar los datos");
-          }
-        });
-    </script>
-    <script src="Js/navbarScript.js"></script>
-  </body>
-  <footer class="footer">
-    <p class="footer__text">
-      &copy; 2025 Adopta Gatitos. Todos los derechos reservados.
-    </p>
-  </footer>
 </html>

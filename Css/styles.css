@@ -74,10 +74,11 @@ h3 {
   margin: 3rem 0;
 }
 
-.main {
-  width: 700px;
+#mainContainer {
+  /* width: 700px; */
   align-items: center;
   margin: auto;
+  background-color: #4a90e2;
 }
 
 .navbar {
@@ -95,11 +96,18 @@ h3 {
   color: var(--action);
 }
 
-.dataContainer {
+#datosContainer{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 5rem;
+  background-color: #ffffff;
+}
+
+/* .dataContainer {
   width: auto;
   height: auto;
   background-color: var(--action);
-}
+} */
 
 .footer {
   background-color: var(--primary);
@@ -110,6 +118,43 @@ h3 {
   text-align: center;
 }
 
-.gato-item{
+.gato-item {
   color: black;
+  width: 50rem;
+  background-color: #4a90e2;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column; /* Asegura que el contenido esté en columna */
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px; /* Opcional para mejor apariencia */
+  margin: auto; /* Centrar en la pantalla */
+  
+  
+}
+
+.gato-item-container{
+  background-color: #e74c3c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Para que se ajuste al padre */
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.gato-item-foto {
+  width: 20rem;
+  height: 20rem;
+  object-fit: cover; /* Asegura que la imagen no se deforme */
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.gato-item-text {
+  font-size: 1.8rem;
+  text-align: center;
+  margin: 0.5rem 0;
+  color: white; /* Para mejor contraste con el fondo */
 }

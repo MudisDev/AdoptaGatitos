@@ -1,78 +1,78 @@
 <!DOCTYPE html>
 <html lang="es">
-  <header>
-    <title>Adopta Gatitos</title>
-    <link rel="stylesheet" href="Css/styles.css" />
-    <link rel="stylesheet" href="Css/normalize.css" />
+<header>
+  <title>Adopta Gatitos</title>
+  <link rel="stylesheet" href="Css/styles.css" />
+  <link rel="stylesheet" href="Css/normalize.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&family=Staatliches&display=swap"
-      rel="stylesheet"
-    />
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&family=Staatliches&display=swap"
+    rel="stylesheet" />
+  <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     /> -->
-  </header>
+</header>
 
-  <body class="contenedor">
-    <p>Adopta Gatitos</p>
-    <p>Este es un plataforma para adoptar gatitos Bv</p>
-    <div id="navbarContainer"></div>
+<body class="contenedor">
+  <p>Adopta Gatitos</p>
+  <p>Este es un plataforma para adoptar gatitos Bv</p>
+  <div id="navbarContainer"></div>
 
-    <p>Kakakakakaka</p>
-    <h3>registrar</h3>
+  <h3>registrar</h3>
 
-    <!--   <pre id="datosContainer" class="dataContainer"></pre> -->
-    <div id="datosContainer"></div>
+  <!--   <pre id="datosContainer" class="dataContainer"></pre> -->
+  <div id="datosContainer"></div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", async function () {
-        try {
-          const response = await fetch(
-            "https://kuramadev.com/adopta_gatitos/Php/mostrar_gatos.php"
-          );
-          const data = await response.json(); // Convertir la respuesta a JSON
+  <script>
+    document.addEventListener("DOMContentLoaded", async function () {
+      try {
+        const response = await fetch(
+          "https://kuramadev.com/adopta_gatitos/Php/mostrar_gatos.php"
+        );
+        const data = await response.json(); // Convertir la respuesta a JSON
 
-          console.log("Datos recibidos:", data); // Para ver qué llega en la consola
+        console.log("Datos recibidos:", data); // Para ver qué llega en la consola
 
-          // Ejemplo: Mostrar los datos en la página
-          const contenedor = document.getElementById("datosContainer");
-          //contenedor.innerHTML = JSON.stringify(data, null, 2); // Mostrar JSON en pantalla
+        // Ejemplo: Mostrar los datos en la página
+        const contenedor = document.getElementById("datosContainer");
+        //contenedor.innerHTML = JSON.stringify(data, null, 2); // Mostrar JSON en pantalla
 
-          data.forEach((gato) => {
-            const item = document.createElement("div");
-            item.classList.add("gato-item");
-            item.innerHTML = `
+        data.forEach((gato) => {
+          const item = document.createElement("div");
+          item.classList.add("gato-item");
+          item.innerHTML = `
+          <div class='gato-item-container'>
+            <img class='gato-item-foto' src="${gato.foto}"> 
             <h3>${gato.nombre} </h3>
-            <p><strong>Genero: </strong>${gato.genero}</p>
-            <p><strong>Foto: </strong>${gato.foto}</p>
-            <p><strong>Fecha de ingreso: </strong>${gato.fecha_ingreso}</p>
-            <p><strong>Descripcion: </strong>${gato.descripcion}</p>
-            <p><strong>Estado: </strong>${gato.estado}</p>
-            <p><strong>Edad: </strong>${gato.edad}</p>
-            <p><strong>Color: </strong>${gato.color}</p>
-            <p><strong>Personalidad: </strong>${gato.id_personalidad}</p>
-            <p><strong>Raza: </strong>${gato.id_raza}</p>
-            <p><strong>Refugio: </strong>${gato.id_refugio}</p>
+            <p class='gato-item-text'><strong>Genero: </strong>${gato.genero}</p>
+            <p class='gato-item-text'><strong>Fecha de ingreso: </strong>${gato.fecha_ingreso}</p>
+            <p class='gato-item-text'><strong>Descripcion: </strong>${gato.descripcion}</p>
+            <p class='gato-item-text'><strong>Estado: </strong>${gato.estado}</p>
+            <p class='gato-item-text'><strong>Edad: </strong>${gato.edad}</p>
+            <p class='gato-item-text'><strong>Color: </strong>${gato.color}</p>
+            <p class='gato-item-text'><strong>Personalidad: </strong>${gato.id_personalidad}</p>
+            <p class='gato-item-text'><strong>Raza: </strong>${gato.id_raza}</p>
+            <p class='gato-item-text'><strong>Refugio: </strong>${gato.id_refugio}</p>
+            </div>
 
             `;
-            contenedor.appendChild(item);
-          });
-        } catch (error) {
-          console.error("Error al obtener datos:", error);
-        }
-      });
-    </script>
-    <script src="Js/navbarScript.js"></script>
-  </body>
-  <footer class="footer">
-    <p class="footer__text">
-      &copy; 2025 Adopta Gatitos. Todos los derechos reservados.
-    </p>
-  </footer>
+          contenedor.appendChild(item);
+        });
+      } catch (error) {
+        console.error("Error al obtener datos:", error);
+      }
+    });
+  </script>
+  <script src="Js/navbarScript.js"></script>
+</body>
+<footer class="footer">
+  <p class="footer__text">
+    &copy; 2025 Adopta Gatitos. Todos los derechos reservados.
+  </p>
+</footer>
+
 </html>
