@@ -15,17 +15,26 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     /> -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+
+
+
+
 </header>
 
 <body class="contenedor">
   <p>Adopta Gatitos</p>
   <p>Este es un plataforma para adoptar gatitos Bv</p>
+
+  <ion-icon name="person"></ion-icon>
+
   <div id="navbarContainer"></div>
 
   <h3>registrar</h3>
 
   <!--   <pre id="datosContainer" class="dataContainer"></pre> -->
   <div id="datosContainer"></div>
+
 
   <script>
     document.addEventListener("DOMContentLoaded", async function () {
@@ -44,23 +53,24 @@
         data.forEach((gato) => {
           const item = document.createElement("div");
           item.classList.add("gato-item");
+
+          // Determinar el icono según el género
+          const icono = gato.genero.toLowerCase() === "macho" ? "fas fa-mars" : "fas fa-venus";
+          const color = gato.genero.toLowerCase() === "macho" ? "color: blue;" : "color: pink;";
+
           item.innerHTML = `
           <div class='gato-item-container'>
             <img class='gato-item-foto' src="${gato.foto}"> 
             <h3>${gato.nombre} </h3>
-            <p class='gato-item-text'><strong>Genero: </strong>${gato.genero}</p>
-            <p class='gato-item-text'><strong>Fecha de ingreso: </strong>${gato.fecha_ingreso}</p>
-            <p class='gato-item-text'><strong>Descripcion: </strong>${gato.descripcion}</p>
-            <p class='gato-item-text'><strong>Estado: </strong>${gato.estado}</p>
+            <p class='gato-item-text'><strong>Género: </strong>${gato.genero} <i class="${icono}" style="${color}"></i></p>
+
             <p class='gato-item-text'><strong>Edad: </strong>${gato.edad}</p>
-            <p class='gato-item-text'><strong>Color: </strong>${gato.color}</p>
-            <p class='gato-item-text'><strong>Personalidad: </strong>${gato.id_personalidad}</p>
-            <p class='gato-item-text'><strong>Raza: </strong>${gato.id_raza}</p>
-            <p class='gato-item-text'><strong>Refugio: </strong>${gato.id_refugio}</p>
+         
             <button onclick="PerfilGato(${gato.id_gato})">Ver perfil</button>
             </div>
 
             `;
+
           contenedor.appendChild(item);
         });
       } catch (error) {
@@ -74,6 +84,7 @@
     }
   </script>
   <script src="Js/navbarScript.js"></script>
+
 </body>
 <footer class="footer">
   <p class="footer__text">

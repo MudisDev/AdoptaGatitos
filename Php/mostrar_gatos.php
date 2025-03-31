@@ -29,17 +29,9 @@ if (mysqli_num_rows($result) > 0) {
             'nombre' => $row['nombre'],
             'genero' => $row['genero'],
             'foto' => $row['foto'],
-            'fecha_ingreso' => $row['fecha_ingreso'],
-            'descripcion' => $row['descripcion'],
-            'estado' => $row['estado'],
+            
             'edad' => $row['edad'],
-            'color' => $row['color'],
-            'fecha_adopcion' => $row['fecha_adopcion'],
-            'id_cartilla' => $row['id_cartilla'],
-            'id_ciudadano' => $row['id_ciudadano'],
-            'id_personalidad' => $row['id_personalidad'],
-            'id_raza' => $row['id_raza'],
-            'id_refugio' => $row['id_refugio']
+            
         ];
     }
 
