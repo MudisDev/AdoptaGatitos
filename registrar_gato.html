@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<header>
+    <title>Adopta Gatitos</title>
+    <link rel="stylesheet" href="Css/styles.css" />
+    <link rel="stylesheet" href="Css/normalize.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&family=Staatliches&display=swap"
+        rel="stylesheet" />
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    /> -->
+</header>
+
+<body class="contenedor">
+    <p>Adopta Gatitos</p>
+    <p>Este es un plataforma para adoptar gatitos Bv</p>
+    INSERT INTO Gato ( genero, foto, fecha_ingreso, descripcion, estado, edad, color, fecha_adopcion, id_cartilla,
+    id_ciudadano, id_personalidad, id_raza, id_refugio)
+    <p>Kakakakakaka</p>
+    <div id="navbarContainer"></div>
+    <div id="mainContainer">
+        <h3>Registrar Gato</h3>
+        <form id="registroGatoForm" method="get">
+            <ul>
+                <li>
+                    <label> NOMBRE: </label>
+                    <input type="text" name="nombre" required />
+                </li>
+
+                <li>
+                    <label> FECHA DE INGRESO: </label>
+                    <input type="date" name="fecha_ingreso" required />
+                </li>
+                <li>
+                    <label> DESCRIPCION: </label>
+                    <input type="text" name="descripcion" required />
+                </li>
+                <li>
+                    <label> ESTADO: </label>
+                    <input type="text" name="estado" required />
+                </li>
+                <li>
+                    <label> EDAD: </label>
+                    <input type="number" name="edad" required />
+                </li>
+                <li>
+                    <label> COLOR: </label>
+                    <input type="text" name="color" required />
+                </li>
+                <li>
+                    <label> PERSONALIDAD: </label>
+                    <input type="text" name="id_personalidad" required />
+                </li>
+
+                <li>
+                    <label> RAZA: </label>
+                    <input type="text" name="id_raza" required />
+                </li>
+
+                <li>
+                    <label> GENERO: </label>
+                    <input type="text" name="genero" required />
+                </li>
+                <li>
+                    <label> FOTO PERFIL: </label>
+                    <input type="text" name="foto" />
+                </li>
+                <li>
+                    <label> REFUGIO: </label>
+                    <input type="text" name="id_refugio" required />
+                </li>
+
+            </ul>
+            <button type="submit">registrar</button>
+        </form>
+    </div>
+    <script>
+        document
+            .getElementById("registroGatoForm")
+            .addEventListener("submit", async function (event) {
+                event.preventDefault(); // Evita que la página se recargue
+
+                const formData = new FormData(this);
+                const params = new URLSearchParams(formData).toString(); // Convierte los datos a formato URL
+                const url = `https://kuramadev.com/adopta_gatitos/Php/registrar_gato.php?${params}`;
+
+                console.log("URL generada:", url); // Verifica que la URL sea correcta
+
+                try {
+                    const response = await fetch(url, { method: "GET", mode: "cors" });
+
+                    const text = await response.text();
+
+                    const result = JSON.parse(text); // Parsea manualmente para evitar errores
+                    alert(result.success || result.error); // Muestra respuesta del servidor
+                } catch (error) {
+                    console.error("Error al enviar el formulario", error);
+                    alert("Hubo un error al enviar los datos");
+                }
+            });
+    </script>
+    <script src="Js/navbarScript.js"></script>
+    </div>
+</body>
+<footer class="footer">
+    <p class="footer__text">
+        &copy; 2025 Adopta Gatitos. Todos los derechos reservados.
+    </p>
+</footer>
+
+</html>
+https://kuramadev.com/adopta_gatitos/Php/registrar_gato.php?nombre=Neko&fecha_ingreso=2025-03-14&descripcion=jugueton&estado=sin+adoptar&edad=1&color=calico+&id_personalidad=1&id_raza=1&genero=hembra&foto=foto+perfil+Bv&id_refugio=1
