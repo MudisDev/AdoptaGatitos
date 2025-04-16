@@ -19,8 +19,6 @@ class Conexion
         // Intentar conexión a la BD
         $this->conn = new mysqli($this->server, $this->user, $this->passwordb, $this->bdname);
 
-
-
         // Verificar errores en la conexión
         if ($this->conn->connect_error) {
             die("Error de conexión: " . $this->conn->connect_error);
@@ -40,42 +38,17 @@ class Conexion
         return "Conexión cerrada.";
     }
 
-    public function getInfoBD()
-    {
-
-        $results = mysqli_query($this->conn, $this->sql);
-
-        if (mysqli_num_rows($results) > 0) {
-            while ($row = mysqli_fetch_assoc($results)) {
-                $datos[] = [
-                    'id_gato' => $row['id_gato'],
-                    'nombre' => $row['nombre'],
-                ];
-
-            }
-            echo json_encode($datos);
-        } else
-            echo json_encode("Error, no hay gatos");
-
-    }
-
-    public function SetSQL(string $sql)
-    {
-        echo $sql;
-        $this->sql = $sql;
-    }
-
     public function SetSelect(string $tabla, array $columnas = ['*'], string $condiciones = '')
     {
         $cols = implode(", ", $columnas);
-        $sql = "SELECT $cols FROM $tabla";
+        $this->sql = "SELECT $cols FROM $tabla";
 
         if (!empty($condiciones)) {
-            $sql .= " WHERE $condiciones";
+            $this->sql .= " WHERE $condiciones";
         }
 
         $resultados = [];
-        $resultado = $this->conn->query($sql);
+        $resultado = $this->conn->query($this->sql);
 
         if ($resultado && $resultado->num_rows > 0) {
             while ($fila = $resultado->fetch_assoc()) {
@@ -93,21 +66,62 @@ class Conexion
         var_dump($resultados);
         return $resultados;
     }
+
+    public function SetInsert(string $tabla, array $columnas, array $datos)
+    {
+        echo "Entro a set insert en conexion";
+
+        $valores = [];
+        foreach ($datos as $dato) {
+            if ($dato === '' || is_null($dato)) {
+                $valores[] = "NULL"; // sin comillas
+            } else {
+                // Escapa y coloca comillas simples
+                $dato_escapado = $this->conn->real_escape_string($dato);
+                $valores[] = "'$dato_escapado'";
+            }
+        }
+
+        echo "paso el foreach";
+
+
+        $columnas = implode(", ", $columnas);
+        $datos = implode(", ", $valores);
+
+
+
+        echo "tabla -> ", $tabla;
+        echo "<br>";
+        echo json_encode($columnas);
+        echo "<br>";
+        echo json_encode($datos);
+        echo "<br>";
+        /* foreach ($datos as $value) {
+            if ($value == '') {
+                $value = null;
+            } */
+        # code...
+
+        /* for ($i=0; $i < count($datos); $i++) { 
+            # code...
+        } */
+
+        $this->sql = "INSERT INTO $tabla($columnas) VALUES($datos)";
+
+        echo "SQL -> ", $this->sql;
+        echo "<br>";
+        $resultado = $this->conn->query($this->sql);
+        if ($resultado) {
+            echo "<br>";
+            echo json_encode(["Success" => "Registro de minino completo"]);
+        } else {
+            echo "<br>";
+            echo json_encode(["Error" => "Resgistro de minino no valido"]);
+        }
+    }
 }
 
-$conexion1 = new Conexion();
-
-// Mostrar información de conexión
-echo $conexion1->getInfoConexion();
-
-//$conexion2->SetSQL("SELECT * FROM Gato; ");
-$conexion1->SetSelect("Ciudadano");
-//$conexion1->getInfoBD();
-
-// Cerrar conexión
-echo "<br>" . $conexion1->cerrarConexion();
-
-$conexion2 = new Conexion();
+/* $conexion2 = new Conexion();
 
 // Mostrar información de conexión
 echo $conexion2->getInfoConexion();
@@ -117,6 +131,6 @@ $conexion2->SetSelect("Gato");
 //$conexion2->getInfoBD();
 
 // Cerrar conexión
-echo "<br>" . $conexion2->cerrarConexion();
+echo "<br>" . $conexion2->cerrarConexion(); */
 
 ?>
