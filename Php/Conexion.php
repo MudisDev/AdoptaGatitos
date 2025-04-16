@@ -7,15 +7,19 @@ class Conexion
     private $bdname;
     private $conn; // Variable para almacenar la conexión
 
-    public function __construct($server, $user, $passwordb, $bdname)
+    private $sql;
+
+    public function __construct(/* $server, $user, $passwordb, $bdname */)
     {
-        $this->server = $server;
-        $this->user = $user;
-        $this->passwordb = $passwordb;
-        $this->bdname = $bdname;
+        $this->server = 'localhost';
+        $this->user = 'u826668871_root2';
+        $this->passwordb = 'Kazooie2518';
+        $this->bdname = 'u826668871_adoptagatitos';
 
         // Intentar conexión a la BD
         $this->conn = new mysqli($this->server, $this->user, $this->passwordb, $this->bdname);
+
+
 
         // Verificar errores en la conexión
         if ($this->conn->connect_error) {
@@ -35,13 +39,41 @@ class Conexion
         $this->conn->close();
         return "Conexión cerrada.";
     }
+
+    public function getInfoBD()
+    {
+
+        $results = mysqli_query($this->conn, $this->sql);
+
+        if (mysqli_num_rows($results) > 0) {
+            while ($row = mysqli_fetch_assoc($results)) {
+                $datos[] = [
+                    'id_gato' => $row['id_gato'],
+                    'nombre' => $row['nombre'],
+                ];
+
+            }
+            echo json_encode($datos);
+        } else
+            echo json_encode("Error, no hay gatos");
+
+    }
+
+    public function SetSQL(string $sql)
+    {
+        echo $sql;
+        $this->sql = $sql;
+    }
 }
 
 // Crear instancia de la clase
-$conexion1 = new Conexion('localhost', 'u826668871_root2', 'Kazooie2518', 'u826668871_adoptagatitos');
+$conexion1 = new Conexion();
 
 // Mostrar información de conexión
 echo $conexion1->getInfoConexion();
+
+$conexion1->SetSQL("SELECT * FROM Gato; ");
+$conexion1->getInfoBD();
 
 // Cerrar conexión
 echo "<br>" . $conexion1->cerrarConexion();
