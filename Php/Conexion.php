@@ -64,18 +64,59 @@ class Conexion
         echo $sql;
         $this->sql = $sql;
     }
+
+    public function SetSelect(string $tabla, array $columnas = ['*'], string $condiciones = '')
+    {
+        $cols = implode(", ", $columnas);
+        $sql = "SELECT $cols FROM $tabla";
+
+        if (!empty($condiciones)) {
+            $sql .= " WHERE $condiciones";
+        }
+
+        $resultados = [];
+        $resultado = $this->conn->query($sql);
+
+        if ($resultado && $resultado->num_rows > 0) {
+            while ($fila = $resultado->fetch_assoc()) {
+                $resultados[] = $fila; // Cada fila es un diccionario (asociativo)
+            }
+        }
+        echo json_encode($resultados);
+        echo "<br>";
+        echo "<br>";
+
+        print_r($resultados);
+        echo "<br>";
+        echo "<br>";
+
+        var_dump($resultados);
+        return $resultados;
+    }
 }
 
-// Crear instancia de la clase
 $conexion1 = new Conexion();
 
 // Mostrar información de conexión
 echo $conexion1->getInfoConexion();
 
-$conexion1->SetSQL("SELECT * FROM Gato; ");
-$conexion1->getInfoBD();
+//$conexion2->SetSQL("SELECT * FROM Gato; ");
+$conexion1->SetSelect("Ciudadano");
+//$conexion1->getInfoBD();
 
 // Cerrar conexión
 echo "<br>" . $conexion1->cerrarConexion();
+
+$conexion2 = new Conexion();
+
+// Mostrar información de conexión
+echo $conexion2->getInfoConexion();
+
+//$conexion2->SetSQL("SELECT * FROM Gato; ");
+$conexion2->SetSelect("Gato");
+//$conexion2->getInfoBD();
+
+// Cerrar conexión
+echo "<br>" . $conexion2->cerrarConexion();
 
 ?>
