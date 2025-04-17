@@ -60,10 +60,26 @@ class Gato
         $this->fecha_adopcion = null;
     }
 
-    public function Perfil_Gato()
+    public function Get_Perfil_Gato()
     {
-        $array = [$this->id_gato, $this->nombre, $this->genero, $this->foto, $this->fecha_ingreso, $this->descripcion, $this->estado, $this->edad, $this->color, $this->fecha_adopcion, $this->id_cartilla, $this->id_ciudadano, $this->id_personalidad, $this->id_raza, $this->id_refugio];
-        //echo json_encode($array);
+        $array = [
+            'id_gato' => $this->id_gato,
+            'nombre' => $this->nombre,
+            'genero' => $this->genero,
+            'foto' => $this->foto,
+            'fecha_ingreso' => $this->fecha_ingreso,
+            'descripcion' => $this->descripcion,
+            'estado' => $this->estado,
+            'edad' => $this->edad,
+            'color' => $this->color,
+            'fecha_adopcion' => $this->fecha_adopcion,
+            'id_cartilla' => $this->id_cartilla,
+            'id_ciudadano' => $this->id_ciudadano,
+            'id_personalidad' => $this->id_personalidad,
+            'id_raza' => $this->id_raza,
+            'id_refugio' => $this->id_refugio
+        ];
+        return $array;
     }
 
     public function Registrar_Gato()
@@ -91,6 +107,66 @@ class Gato
 
     }
 
+    public function Get_Id_Gato()
+    {
+        return $this->id_gato;
+    }
+    public function Get_Id_Nombre()
+    {
+        return $this->nombre;
+    }
+    public function Get_Id_Genero()
+    {
+        return $this->genero;
+    }
+    public function Get_Id_Foto()
+    {
+        return $this->foto;
+    }
+    public function Get_Fecha_Ingreso()
+    {
+        return $this->fecha_ingreso;
+    }
+    public function Get_Descripcion()
+    {
+        return $this->descripcion;
+    }
+    public function Get_Estado()
+    {
+        return $this->estado;
+    }
+    public function Get_Edad()
+    {
+        return $this->edad;
+    }
+    public function Get_Color()
+    {
+        return $this->color;
+    }
+    public function Get_Fecha_Adopcion()
+    {
+        return $this->fecha_adopcion;
+    }
+    public function Get_Id_Cartilla()
+    {
+        return $this->id_cartilla;
+    }
+    public function Get_Id_Ciudadano()
+    {
+        return $this->id_ciudadano;
+    }
+    public function Get_Personalidad()
+    {
+        return $this->id_personalidad;
+    }
+    public function Get_Raza()
+    {
+        return $this->id_raza;
+    }
+    public function Get_Refugio()
+    {
+        return $this->id_refugio;
+    }
 }
 
 

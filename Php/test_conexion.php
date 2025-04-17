@@ -24,13 +24,13 @@ $id_raza = 1;
 $id_refugio = 1;
 
 //$gato1 = new Gato($nombre, $genero, $foto, $fecha_ingreso, $descripcion, $estado, $edad, $color, $id_personalidad, $id_raza, $id_refugio);
-$gato1 = new Gato();
-$gato1->Constructor_Registro($_GET);
-$gato1->Registrar_Gato();
+//$gato1 = new Gato();
+//$gato1->Constructor_Registro($_GET);
+//$gato1->Registrar_Gato();
 //$gato1->Perfil_Gato();
 //$gato1->Registrar_Gato();
 
-/* $gato2 = new Gato();
+$gato2 = new Gato();
 $gato2->Constructor_ID($id_gato);
 $gato2->Buscar_Gato();
 
@@ -38,6 +38,8 @@ echo "<br><br><br>";
 echo "Perfil gato";
 echo "<br><br><br>";
 
-$gato2->Perfil_Gato(); */
+echo json_encode($gato2->Get_Perfil_Gato());
+echo "<br><br><br>";
+print_r($gato2->Get_Perfil_Gato());
 
 ?>
