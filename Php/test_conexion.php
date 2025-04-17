@@ -2,6 +2,8 @@
 //require_once 'clases/Conexion.php';
 require_once 'clases/Gato.php';
 require_once 'clases/Lista.php';
+require_once 'clases/Ciudadano.php';
+
 
 //$conexiontest = new Conexion();
 //$conexiontest->SetSelect("Refugio");
@@ -31,7 +33,7 @@ $id_refugio = 1;
 //$gato1->Perfil_Gato();
 //$gato1->Registrar_Gato();
 
-$gato2 = new Gato();
+/* $gato2 = new Gato();
 $gato2->Constructor_ID($id_gato);
 $gato2->Buscar_Gato();
 
@@ -45,6 +47,33 @@ print_r($gato2->Get_Perfil_Gato());
 
 $lista = new Lista();
 $lista->Select_Gatos();
+ */
+
+$nombre = "kakakkaa";
+$username = "Test";
+$email = "test@gmail.com";
+$password = "Kaooie";
+$telefono = "457815";
+$genero = "amsculino";
+$foto_perfil = "httml asdf";
+
+$ciudadano1 = new Ciudadano(
+    [
+        "nombre" => $nombre,
+        "username" => $username,
+        "email" => $email,
+        "password" => $password,
+        "telefono" => $telefono,
+        "genero" => $genero,
+        "foto_perfil" => $foto_perfil
+    ]
+);
+
+$resultados = $ciudadano1->Get_Perfil_Ciudadano();
+print_r($resultados);
+echo "<br><br>";
+echo json_encode($resultados);
+$ciudadano1->Registrar_Ciudadano();
 
 
 ?>

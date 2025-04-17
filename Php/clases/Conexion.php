@@ -75,6 +75,9 @@ class Conexion
         foreach ($datos as $dato) {
             if ($dato === '' || is_null($dato)) {
                 $valores[] = "NULL"; // sin comillas
+
+            } elseif (strtoupper($dato) === 'CURDATE()') {
+                $valores[] = "CURDATE()"; // sin comillas, es una función SQL
             } else {
                 // Escapa y coloca comillas simples
                 $dato_escapado = $this->conn->real_escape_string($dato);
