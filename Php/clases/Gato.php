@@ -23,25 +23,20 @@ class Gato
 
     private $array_insert = ["nombre", "genero", "foto", "fecha_ingreso", "descripcion", "estado", "edad", "color", "fecha_adopcion", "id_cartilla", "id_ciudadano", "id_personalidad", "id_raza", "id_refugio"];
 
-    public function __construct(
-        $nombre,
-        $genero,
-        $foto,
-        $fecha_ingreso,
-        $descripcion,
-        $estado,
-        $edad,
-        $color,
-        $id_personalidad,
-        $id_raza,
-        $id_refugio,
-        $id_gato = null,
-        $fecha_adopcion = null,
-        $id_cartilla = null,
-        $id_ciudadano = null,
-    ) {
+    public function __construct()
+    {
+    }
+
+    public function Constructor_ID($id_gato)
+    {
+        echo "Entro al constructor ID";
         $this->id_gato = $id_gato;
-        $this->nombre = $nombre;
+    }
+    public function Constructor_Registro(
+        array $datos
+        //$nombre, $genero, $foto, $fecha_ingreso, $descripcion, $estado, $edad, $color, $id_personalidad, $id_raza, $id_refugio
+    ) {
+        /* $this->nombre = $nombre;
         $this->genero = $genero;
         $this->foto = $foto;
         $this->fecha_ingreso = $fecha_ingreso;
@@ -49,44 +44,53 @@ class Gato
         $this->estado = $estado;
         $this->edad = $edad;
         $this->color = $color;
-        $this->fecha_adopcion = $fecha_adopcion;
-        $this->id_cartilla = $id_cartilla;
-        $this->id_ciudadano = $id_ciudadano;
         $this->id_personalidad = $id_personalidad;
         $this->id_raza = $id_raza;
-        $this->id_refugio = $id_refugio;
-    }
+        $this->id_refugio = $id_refugio;  */
 
+        foreach ($datos as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->$key = $value;
+            }
+        }
+
+        $this->id_gato = null;
+        $this->id_cartilla = null;
+        $this->id_ciudadano = null;
+        $this->fecha_adopcion = null;
+    }
 
     public function Perfil_Gato()
     {
-        $array = [
-            $this->id_gato,
-            $this->nombre,
-            $this->genero,
-            $this->foto,
-            $this->fecha_ingreso,
-            $this->descripcion,
-            $this->estado,
-            $this->edad,
-            $this->color,
-            $this->fecha_adopcion,
-            $this->id_cartilla,
-            $this->id_ciudadano,
-            $this->id_personalidad,
-            $this->id_raza,
-            $this->id_refugio
-        ];
-        print_r($array);
-        echo json_encode($array);
+        $array = [$this->id_gato, $this->nombre, $this->genero, $this->foto, $this->fecha_ingreso, $this->descripcion, $this->estado, $this->edad, $this->color, $this->fecha_adopcion, $this->id_cartilla, $this->id_ciudadano, $this->id_personalidad, $this->id_raza, $this->id_refugio];
+        //echo json_encode($array);
     }
 
     public function Registrar_Gato()
     {
-        echo "Entro a registrar_gato";
+        //echo "Entro a registrar_gato";
         $registro = new Conexion();
         $registro->SetInsert("Gato", $this->array_insert, [$this->nombre, $this->genero, $this->foto, $this->fecha_ingreso, $this->descripcion, $this->estado, $this->edad, $this->color, $this->fecha_adopcion, $this->id_cartilla, $this->id_ciudadano, $this->id_personalidad, $this->id_raza, $this->id_refugio]);
-    }     
+    }
+    public function Buscar_Gato()
+    {
+        $buscar = new Conexion();
+        $resultado = $buscar->SetSelect("Gato", ['*'], "id_gato = $this->id_gato");
+        //echo "<br><br>RESULTADOS<br><br>";
+        //echo json_encode($resultado);
+
+        $datos = $resultado[0];
+
+        foreach ($datos as $key => $valor) {
+            if (property_exists($this, $key)) {
+                $this->$key = $valor;
+            }
+            //echo "key => $key, valor => $valor";
+        }
+
+
+    }
+
 }
 
 

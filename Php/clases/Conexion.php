@@ -113,10 +113,10 @@ class Conexion
         $resultado = $this->conn->query($this->sql);
         if ($resultado) {
             echo "<br>";
-            echo json_encode(["Success" => "Registro de minino completo"]);
+            echo json_encode(["Success" => "Registro exitoso en tabla $tabla."]);
         } else {
             echo "<br>";
-            echo json_encode(["Error" => "Resgistro de minino no valido"]);
+            echo json_encode(["Error" => "Resgistro fallido en tabla $tabla."]);
         }
     }
 }
