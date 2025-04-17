@@ -33,7 +33,7 @@
             console.log(`id_gato recibido => ${id_gato}`);
             if (id_gato) {
                 try {
-                    const response = await fetch(`https://kuramadev.com/adopta_gatitos/Php/perfil_gato.php?id_gato=${id_gato}`);
+                    const response = await fetch(`https://kuramadev.com/adopta_gatitos/Php/api/gato/perfil_gato.php?id_gato=${id_gato}`);
                     const data = await response.json();
                     console.log(data);
                     document.getElementById("detalleGato").innerHTML = `

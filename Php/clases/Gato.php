@@ -27,7 +27,7 @@ class Gato
 
     public function Constructor_ID($id_gato)
     {
-        echo "Entro al constructor ID";
+        //echo "Entro al constructor ID";
         $this->id_gato = $id_gato;
     }
     public function Constructor_Registro(
