@@ -1,7 +1,5 @@
 <?php
 require_once 'Conexion.php';
-
-echo "gato script Bv2";
 class Gato
 {
 
@@ -97,14 +95,18 @@ class Gato
 
         $datos = $resultado[0];
 
+        $this->Constructor($datos);
+
+
+    }
+    public function Constructor(array $datos)
+    {
         foreach ($datos as $key => $valor) {
             if (property_exists($this, $key)) {
                 $this->$key = $valor;
             }
             //echo "key => $key, valor => $valor";
         }
-
-
     }
 
     public function Get_Id_Gato()

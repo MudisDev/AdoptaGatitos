@@ -21,10 +21,7 @@ class Lista
     {
         $conexion = new Conexion();
         $resultados = $conexion->SetSelect("Gato");
-        echo "<br>";
-        echo "Clase Lista";
-        echo "<br>";
-        echo json_encode($resultados);
+        return $resultados;
     }
 }
 
