@@ -55,7 +55,7 @@ class Conexion
                 $resultados[] = $fila; // Cada fila es un diccionario (asociativo)
             }
         }
-        echo json_encode($resultados);
+        /* echo json_encode($resultados);
         echo "<br>";
         echo "<br>";
 
@@ -63,7 +63,7 @@ class Conexion
         echo "<br>";
         echo "<br>";
 
-        var_dump($resultados);
+        var_dump($resultados); */
         return $resultados;
     }
 

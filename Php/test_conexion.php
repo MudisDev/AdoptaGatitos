@@ -1,6 +1,7 @@
 <?php
 //require_once 'clases/Conexion.php';
 require_once 'clases/Gato.php';
+require_once 'clases/Lista.php';
 
 //$conexiontest = new Conexion();
 //$conexiontest->SetSelect("Refugio");
@@ -30,7 +31,7 @@ $id_refugio = 1;
 //$gato1->Perfil_Gato();
 //$gato1->Registrar_Gato();
 
-$gato2 = new Gato();
+/* $gato2 = new Gato();
 $gato2->Constructor_ID($id_gato);
 $gato2->Buscar_Gato();
 
@@ -40,6 +41,10 @@ echo "<br><br><br>";
 
 echo json_encode($gato2->Get_Perfil_Gato());
 echo "<br><br><br>";
-print_r($gato2->Get_Perfil_Gato());
+print_r($gato2->Get_Perfil_Gato()); */
+
+$lista = new Lista();
+$lista->Select_Gatos();
+
 
 ?>
