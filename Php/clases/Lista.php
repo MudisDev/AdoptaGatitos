@@ -20,7 +20,7 @@ class Lista
     public function Select_Gatos()
     {
         $conexion = new Conexion();
-        $resultados = $conexion->SetSelect("Gato");
+        $resultados = $conexion->SetSelect("Gato", ["id_gato","nombre","genero","edad","foto"]);
         return $resultados;
     }
 }

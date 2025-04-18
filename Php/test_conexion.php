@@ -49,7 +49,7 @@ $lista = new Lista();
 $lista->Select_Gatos();
  */
 
-$nombre = "kakakkaa";
+/* $nombre = "kakakkaa";
 $username = "Test";
 $email = "test@gmail.com";
 $password = "Kaooie";
@@ -73,7 +73,11 @@ $resultados = $ciudadano1->Get_Perfil_Ciudadano();
 print_r($resultados);
 echo "<br><br>";
 echo json_encode($resultados);
-$ciudadano1->Registrar_Ciudadano();
+$ciudadano1->Registrar_Ciudadano(); */
 
+$username = $_GET['username'];
+
+$conexion = new Conexion();
+$conexion->SetDelete("Ciudadano", "username = ",$username);
 
 ?>

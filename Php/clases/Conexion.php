@@ -55,16 +55,24 @@ class Conexion
                 $resultados[] = $fila; // Cada fila es un diccionario (asociativo)
             }
         }
-        /* echo json_encode($resultados);
-        echo "<br>";
-        echo "<br>";
 
-        print_r($resultados);
-        echo "<br>";
-        echo "<br>";
-
-        var_dump($resultados); */
         return $resultados;
+    }
+
+    public function SetDelete(string $tabla, string $condiciones, string $id)
+    {
+        $this->sql = "DELETE FROM $tabla WHERE $condiciones'$id'";
+        $resultado = $this->conn->query($this->sql);
+
+        if ($resultado) {
+            if ($this->conn->affected_rows > 0) {
+                echo json_encode(["Success" => "DELETE en tabla $tabla exitoso"]);
+            } else {
+                echo json_encode(["Warning" => "No se elimino ninguna fila en tabla $tabla"]);
+            }
+        } else {
+            echo json_encode(["Error" => "DELETE fallido en tabla $tabla"]);
+        }
     }
 
     public function SetInsert(string $tabla, array $columnas, array $datos)
@@ -99,15 +107,7 @@ class Conexion
         echo "<br>";
         echo json_encode($datos);
         echo "<br>";
-        /* foreach ($datos as $value) {
-            if ($value == '') {
-                $value = null;
-            } */
-        # code...
 
-        /* for ($i=0; $i < count($datos); $i++) { 
-            # code...
-        } */
 
         $this->sql = "INSERT INTO $tabla($columnas) VALUES($datos)";
 
@@ -115,25 +115,15 @@ class Conexion
         echo "<br>";
         $resultado = $this->conn->query($this->sql);
         if ($resultado) {
-            echo "<br>";
-            echo json_encode(["Success" => "Registro exitoso en tabla $tabla."]);
+            if ($this->conn->affected_rows > 0) {
+                echo json_encode(["Success" => "Registro exitoso en tabla $tabla."]);
+            } else {
+                echo json_encode(["Warning" => "La consulta se ejecutó, pero no se insertó ninguna fila en $tabla."]);
+            }
         } else {
-            echo "<br>";
-            echo json_encode(["Error" => "Resgistro fallido en tabla $tabla."]);
+            echo json_encode(["Error" => "Registro fallido en tabla $tabla."]);
         }
     }
 }
-
-/* $conexion2 = new Conexion();
-
-// Mostrar información de conexión
-echo $conexion2->getInfoConexion();
-
-//$conexion2->SetSQL("SELECT * FROM Gato; ");
-$conexion2->SetSelect("Gato");
-//$conexion2->getInfoBD();
-
-// Cerrar conexión
-echo "<br>" . $conexion2->cerrarConexion(); */
 
 ?>
