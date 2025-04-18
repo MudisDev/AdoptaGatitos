@@ -17,7 +17,12 @@ class Ciudadano
     private $array_insert = ["nombre", "username", "email", "password", "fecha_registro", "telefono", "genero", "foto_perfil"];
     private $funcion_fecha = "CURDATE()";
 
-    public function __construct(array $datos)
+    public function __construct()
+    {
+
+    }
+
+    public function Constructor_Registro(array $datos)
     {
         foreach ($datos as $key => $value) {
             if (property_exists($this, $key)) {
@@ -25,6 +30,11 @@ class Ciudadano
 
             }
         }
+    }
+
+    public function Constructor_Id($id_ciudadano)
+    {
+        $this->id_ciudadano = $id_ciudadano;
     }
 
     public function Registrar_Ciudadano()
@@ -62,6 +72,13 @@ class Ciudadano
             $this->foto_perfil
         ];
         return $array;
+    }
+
+
+    public function Borrar_Cuenta()
+    {
+        $conexion = new Conexion();
+        $conexion->SetDelete("Ciudadano", "username = ", $this->id_ciudadano);
     }
 
 }
