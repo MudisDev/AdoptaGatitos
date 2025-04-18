@@ -23,6 +23,13 @@ class Lista
         $resultados = $conexion->SetSelect("Gato", ["id_gato","nombre","genero","edad","foto"]);
         return $resultados;
     }
+
+    public function Select_Refugios(){
+        $conexion = new Conexion();
+        $resultados = $conexion->SetSelect("Refugio");
+        $conexion->cerrarConexion();
+        return $resultados;
+    }
 }
 
 ?>
