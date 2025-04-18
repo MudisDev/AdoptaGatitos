@@ -76,8 +76,15 @@ echo json_encode($resultados);
 $ciudadano1->Registrar_Ciudadano(); */
 
 $username = $_GET['username'];
+$password = $_GET['password'];
 
-$conexion = new Conexion();
-$conexion->SetDelete("Ciudadano", "username = ",$username);
+//$conexion = new Conexion();
+//$conexion->SetDelete("Ciudadano", "username = ",$username);
+$ciudadano = new Ciudadano();
+$ciudadano->Constructor_Iniciar_Sesion($username, $password);
+$ciudadano->Iniciar_Sesion();
+$resultado = $ciudadano->Get_Perfil_Ciudadano();
+//print_r($resultado);
+
 
 ?>

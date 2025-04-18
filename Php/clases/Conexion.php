@@ -59,6 +59,30 @@ class Conexion
         return $resultados;
     }
 
+    public function IniciarSesion(string $tabla, array $columnas = ['*'], $columna_usuario, $username, $password)
+    {
+        $cols = implode(", ", $columnas);
+        $username = $this->conn->real_escape_string($username); // para prevenir inyecciones básicas
+
+        $band = false;
+
+        $this->sql = "SELECT $cols FROM $tabla WHERE $columna_usuario = '$username'";
+        $resultados = [];
+        $resultado = $this->conn->query($this->sql);
+
+        if ($resultado && $resultado->num_rows > 0) {
+            while ($fila = $resultado->fetch_assoc()) {
+                if ($password == $fila['password']) {
+                    $band = true;
+                    $resultados[] = $fila; // Cada fila es un diccionario (asociativo)
+                }
+            }
+            if (!$band)
+                return json_encode(["Error" => "Credenciales incorrectas"]);
+        }
+        return json_encode($resultados);
+    }
+
     public function SetDelete(string $tabla, string $condiciones, $id)
     {
         $this->sql = "DELETE FROM $tabla WHERE $condiciones'$id'";

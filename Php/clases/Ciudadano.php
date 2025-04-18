@@ -37,6 +37,20 @@ class Ciudadano
         $this->id_ciudadano = $id_ciudadano;
     }
 
+    public function Constructor(array $datos)
+    {
+        foreach ($datos as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->$key = $value;
+            }
+        }
+    }
+    public function Constructor_Iniciar_Sesion($username, $password)
+    {
+        $this->username = $username;
+        $this->password = $password;
+    }
+
     public function Registrar_Ciudadano()
     {
         $conexion = new Conexion();
@@ -79,6 +93,22 @@ class Ciudadano
     {
         $conexion = new Conexion();
         $conexion->SetDelete("Ciudadano", "username = ", $this->id_ciudadano);
+    }
+
+    public function Iniciar_Sesion()
+    {
+        $conexion = new Conexion();
+        $resultado_json = $conexion->IniciarSesion("Ciudadano", ["*"], "username", $this->username, $this->password);
+        // Decodificar el JSON a un arreglo asociativo
+        $resultado = json_decode($resultado_json, true);
+
+        // Verificar si contiene el campo 'Error'
+        if (isset($resultado['Error'])) {
+            echo json_encode($resultado); // o maneja el error como gustes
+        } else {
+            // Si no hay error, llenar los datos del ciudadano
+            $this->Constructor_Registro($resultado[0]);
+        }
     }
 
 }
