@@ -148,6 +148,28 @@ class Conexion
             echo json_encode(["Error" => "Registro fallido en tabla $tabla."]);
         }
     }
+
+    public function SetActualizarRelacion($tabla, $id_primario, $id_foraneo, $columna_actualizar, $condiciones)
+    {
+        $this->sql = "UPDATE $tabla SET $columna_actualizar = '$id_foraneo' WHERE $condiciones '$id_primario'";
+
+        $resultado = $this->conn->query($this->sql);
+
+        if ($resultado) {
+            if ($this->conn->affected_rows > 0) {
+                echo json_encode(["Success" => "Update exitoso en tabla $tabla."]);
+            } else {
+                echo json_encode(["Warning" => "La consulta se ejecutó, pero no se actualizo ninguna fila en $tabla."]);
+            }
+        } else {
+            echo json_encode([
+                "error" => "Update fallido en tabla $tabla.",
+                "sql" => $this->sql,
+                "mysql_error" => $this->conn->error
+            ]);
+        }
+
+    }
 }
 
 ?>

@@ -103,9 +103,18 @@ $foto_perfil = "Bf";
 //$fecha_ingreso = "";
 $id_refugio = 1; */
 
-$encargado = new Encargado();
+/* $encargado = new Encargado();
 $encargado->Constructor_Registro($_GET);
-$encargado->Registrar_Encargado();
+$encargado->Registrar_Encargado(); */
+
+$id_ciudadano = $_GET['id_ciudadano'];
+$id_gato = $_GET['id_gato'];
+$tabla = $_GET['tabla'];
+$columna = $_GET['columna'];
+$condiciones = "id_gato =";
+
+$conexion = new Conexion();
+$conexion->SetActualizarRelacion($tabla, $id_gato,$id_ciudadano,$columna, $condiciones);
 
 
 ?>

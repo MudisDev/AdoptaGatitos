@@ -92,7 +92,7 @@ class Ciudadano
     public function Borrar_Cuenta()
     {
         $conexion = new Conexion();
-        $conexion->SetDelete("Ciudadano", "username = ", $this->id_ciudadano);
+        $conexion->SetDelete("Ciudadano", "username = ", $this->username);
     }
 
     public function Iniciar_Sesion()
