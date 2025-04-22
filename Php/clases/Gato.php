@@ -3,60 +3,34 @@ require_once 'Conexion.php';
 class Gato
 {
 
-    private $id_gato;
-    private $nombre;
-    private $genero;
-    private $foto;
-    private $fecha_ingreso;
-    private $descripcion;
-    private $estado;
-    private $edad;
-    private $color;
-    private $fecha_adopcion;
-    private $id_cartilla;
-    private $id_ciudadano;
-    private $id_personalidad;
-    private $id_raza;
-    private $id_refugio;
+    private $id_gato = null;
+    private $nombre = null;
+    private $genero = null;
+    private $foto = null;
+    private $fecha_ingreso = null;
+    private $descripcion = null;
+    private $estado = null;
+    private $edad = null;
+    private $color = null;
+    private $fecha_adopcion = null;
+    private $id_cartilla = null;
+    private $id_ciudadano = null;
+    private $id_personalidad = null;
+    private $id_raza = null;
+    private $id_refugio = null;
 
     private $array_insert = ["nombre", "genero", "foto", "fecha_ingreso", "descripcion", "estado", "edad", "color", "fecha_adopcion", "id_cartilla", "id_ciudadano", "id_personalidad", "id_raza", "id_refugio"];
 
-    public function __construct()
+    public function __construct( array $datos)
     {
-    }
-
-    public function Constructor_ID($id_gato)
-    {
-        //echo "Entro al constructor ID";
-        $this->id_gato = $id_gato;
-    }
-    public function Constructor_Registro(
-        array $datos
-        //$nombre, $genero, $foto, $fecha_ingreso, $descripcion, $estado, $edad, $color, $id_personalidad, $id_raza, $id_refugio
-    ) {
-        /* $this->nombre = $nombre;
-        $this->genero = $genero;
-        $this->foto = $foto;
-        $this->fecha_ingreso = $fecha_ingreso;
-        $this->descripcion = $descripcion;
-        $this->estado = $estado;
-        $this->edad = $edad;
-        $this->color = $color;
-        $this->id_personalidad = $id_personalidad;
-        $this->id_raza = $id_raza;
-        $this->id_refugio = $id_refugio;  */
-
-        foreach ($datos as $key => $value) {
-            if (property_exists($this, $key)) {
+        foreach($datos as $key => $value){
+            if(property_exists($this, $key)){
                 $this->$key = $value;
             }
         }
-
-        $this->id_gato = null;
-        $this->id_cartilla = null;
-        $this->id_ciudadano = null;
-        $this->fecha_adopcion = null;
     }
+
+    
 
     public function Get_Perfil_Gato()
     {
@@ -95,11 +69,11 @@ class Gato
 
         $datos = $resultado[0];
 
-        $this->Constructor($datos);
+        $this->Set_Datos($datos);
 
 
     }
-    public function Constructor(array $datos)
+    public function Set_Datos(array $datos)
     {
         foreach ($datos as $key => $valor) {
             if (property_exists($this, $key)) {
