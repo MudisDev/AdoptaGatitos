@@ -4,40 +4,20 @@ require_once 'Conexion.php';
 class Ciudadano
 {
 
-    private $id_ciudadano;
-    private $nombre;
-    private $username;
-    private $email;
-    private $password;
-    private $fecha_registro;
-    private $telefono;
-    private $genero;
-    private $foto_perfil;
+    private $id_ciudadano = null;
+    private $nombre = null;
+    private $username = null;
+    private $email = null;
+    private $password = null;
+    private $fecha_registro = null;
+    private $telefono = null;
+    private $genero = null;
+    private $foto_perfil = null;
 
     private $array_insert = ["nombre", "username", "email", "password", "fecha_registro", "telefono", "genero", "foto_perfil"];
     private $funcion_fecha = "CURDATE()";
 
-    public function __construct()
-    {
-
-    }
-
-    public function Constructor_Registro(array $datos)
-    {
-        foreach ($datos as $key => $value) {
-            if (property_exists($this, $key)) {
-                $this->$key = $value;
-
-            }
-        }
-    }
-
-    public function Constructor_Id($id_ciudadano)
-    {
-        $this->id_ciudadano = $id_ciudadano;
-    }
-
-    public function Constructor(array $datos)
+    public function __construct(array $datos)
     {
         foreach ($datos as $key => $value) {
             if (property_exists($this, $key)) {
@@ -45,10 +25,14 @@ class Ciudadano
             }
         }
     }
-    public function Constructor_Iniciar_Sesion($username, $password)
+
+    public function SetDatos(array $datos)
     {
-        $this->username = $username;
-        $this->password = $password;
+        foreach ($datos as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->$key = $value;
+            }
+        }
     }
 
     public function Registrar_Ciudadano()
@@ -107,10 +91,17 @@ class Ciudadano
             echo json_encode($resultado); // o maneja el error como gustes
         } else {
             // Si no hay error, llenar los datos del ciudadano
-            $this->Constructor_Registro($resultado[0]);
+            $this->SetDatos($resultado[0]);
         }
+    }
+
+    public function Adoptar($tabla, $id_gato, $columna_actualizar, $condiciones)
+    {
+        $conexion = new Conexion();
+        $conexion->SetActualizarRelacion($tabla, $id_gato, $this->id_ciudadano, $columna_actualizar, $condiciones);
+
     }
 
 }
 
-?>
+?>/

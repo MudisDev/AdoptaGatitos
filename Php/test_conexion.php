@@ -110,11 +110,14 @@ $encargado->Registrar_Encargado(); */
 $id_ciudadano = $_GET['id_ciudadano'];
 $id_gato = $_GET['id_gato'];
 $tabla = $_GET['tabla'];
-$columna = $_GET['columna'];
+$columna_actualizar = $_GET['columna_actualizar'];
 $condiciones = "id_gato =";
 
-$conexion = new Conexion();
-$conexion->SetActualizarRelacion($tabla, $id_gato,$id_ciudadano,$columna, $condiciones);
+/* $conexion = new Conexion();
+$conexion->SetActualizarRelacion($tabla, $id_gato,$id_ciudadano,$columna, $condiciones); */
+$ciudadano = new Ciudadano(['id_ciudadano' => $id_ciudadano]);
+$ciudadano->Adoptar($tabla,$id_gato,$columna_actualizar, $condiciones);
+
 
 
 ?>
