@@ -17,24 +17,13 @@ class Encargado
     private $array_insert = ["nombre", "username", "email", "password", "telefono", "foto_perfil", "fecha_ingreso", "id_refugio"];
     private $funcion_fecha = "CURDATE()";
 
-    public function __construct()
-    {
-
-    }
-
-    public function Constructor_Registro(array $datos)
+    public function __construct(array $datos)
     {
         foreach ($datos as $key => $value) {
             if (property_exists($this, $key)) {
                 $this->$key = $value;
             }
         }
-    }
-
-    public function Constructor_Id($id_encargado){
-
-        $this->id_encargado = $id_encargado;
-
     }
 
     public function Registrar_Encargado()
@@ -44,7 +33,8 @@ class Encargado
         $conexion->cerrarConexion();
     }
 
-    public function Get_Perfil_Encargado(){
+    public function Get_Perfil_Encargado()
+    {
 
     }
 }
