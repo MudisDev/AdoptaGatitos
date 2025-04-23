@@ -90,7 +90,7 @@ h3 {
 }
 
 .navbar__url {
-  font-size: 3rem;
+  font-size: 2rem;
   font-family: var(--fuentePrincipal);
 
   color: var(--action);
