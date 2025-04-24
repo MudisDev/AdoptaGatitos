@@ -29,8 +29,9 @@ class Encargado
     public function Registrar_Encargado()
     {
         $conexion = new Conexion();
-        $conexion->SetInsert("Encargado", $this->array_insert, [$this->nombre, $this->username, $this->email, $this->password, $this->telefono, $this->foto_perfil, $this->funcion_fecha, $this->id_refugio]);
+        $resultado = $conexion->SetInsert("Encargado", $this->array_insert, [$this->nombre, $this->username, $this->email, $this->password, $this->telefono, $this->foto_perfil, $this->funcion_fecha, $this->id_refugio]);
         $conexion->cerrarConexion();
+        return $resultado;
     }
 
     public function Get_Perfil_Encargado()

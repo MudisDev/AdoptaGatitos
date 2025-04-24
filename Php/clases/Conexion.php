@@ -78,9 +78,9 @@ class Conexion
                 }
             }
             if (!$band)
-                return json_encode(["Error" => "Credenciales incorrectas"]);
+                return ["Error" => "Credenciales incorrectas"];
         }
-        return json_encode($resultados);
+        return $resultados;
     }
 
     public function SetDelete(string $tabla, string $condiciones, $id)
@@ -90,18 +90,18 @@ class Conexion
 
         if ($resultado) {
             if ($this->conn->affected_rows > 0) {
-                echo json_encode(["Success" => "DELETE en tabla $tabla exitoso"]);
+                return["Success" => "DELETE en tabla $tabla exitoso"];
             } else {
-                echo json_encode(["Warning" => "No se elimino ninguna fila en tabla $tabla"]);
+                return["Warning" => "No se elimino ninguna fila en tabla $tabla"];
             }
         } else {
-            echo json_encode(["Error" => "DELETE fallido en tabla $tabla"]);
+            return["Error" => "DELETE fallido en tabla $tabla"];
         }
     }
 
     public function SetInsert(string $tabla, array $columnas, array $datos)
     {
-        echo "Entro a set insert en conexion";
+        //echo "Entro a set insert en conexion";
 
         $valores = [];
         foreach ($datos as $dato) {
@@ -117,35 +117,32 @@ class Conexion
             }
         }
 
-        echo "paso el foreach";
+        //echo "paso el foreach";
 
 
         $columnas = implode(", ", $columnas);
         $datos = implode(", ", $valores);
 
-
-
-        echo "tabla -> ", $tabla;
+/*         echo "tabla -> ", $tabla;
         echo "<br>";
         echo json_encode($columnas);
         echo "<br>";
         echo json_encode($datos);
-        echo "<br>";
-
+        echo "<br>"; */
 
         $this->sql = "INSERT INTO $tabla($columnas) VALUES($datos)";
 
-        echo "SQL -> ", $this->sql;
-        echo "<br>";
+        /* echo "SQL -> ", $this->sql;
+        echo "<br>"; */
         $resultado = $this->conn->query($this->sql);
         if ($resultado) {
             if ($this->conn->affected_rows > 0) {
-                echo json_encode(["Success" => "Registro exitoso en tabla $tabla."]);
+                return ["Success" => "Registro exitoso en tabla $tabla."];
             } else {
-                echo json_encode(["Warning" => "La consulta se ejecutó, pero no se insertó ninguna fila en $tabla."]);
+                return["Warning" => "La consulta se ejecutó, pero no se insertó ninguna fila en $tabla."];
             }
         } else {
-            echo json_encode(["Error" => "Registro fallido en tabla $tabla."]);
+            return["Error" => "Registro fallido en tabla $tabla."];
         }
     }
 
@@ -157,16 +154,16 @@ class Conexion
 
         if ($resultado) {
             if ($this->conn->affected_rows > 0) {
-                echo json_encode(["Success" => "Update exitoso en tabla $tabla."]);
+                return ["Success" => "Update exitoso en tabla $tabla."];
             } else {
-                echo json_encode(["Warning" => "La consulta se ejecutó, pero no se actualizo ninguna fila en $tabla."]);
+                return ["Warning" => "La consulta se ejecutó, pero no se actualizo ninguna fila en $tabla."];
             }
         } else {
-            echo json_encode([
+            return [
                 "error" => "Update fallido en tabla $tabla.",
                 "sql" => $this->sql,
                 "mysql_error" => $this->conn->error
-            ]);
+            ];
         }
 
     }
