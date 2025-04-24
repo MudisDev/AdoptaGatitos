@@ -1,12 +1,9 @@
 <?php
 
-// Habilitar CORS para permitir solicitudes de cualquier origen
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-
+require_once "../../utils/headers.php";
 require_once "../../clases/Conexion.php";
 require_once "../../clases/Ciudadano.php";
+
 
 $id_ciudadano = $_GET['id_ciudadano'];
 $id_gato = $_GET['id_gato'];
