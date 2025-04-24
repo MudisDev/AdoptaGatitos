@@ -24,19 +24,42 @@
   <p>Kakakakakaka</p>
   <div id="navbarContainer"></div>
   <div id="mainContainer">
-    
+
+
+
+    <h3>Iniciar Sesion</h3>
+    <form id="iniciarSesionUsuarioForm" method="get">
+      <!-- nombre=EncargadoTest&username=enca21&email=encargado@gmail.com&password=Kazo&telefono=0123456789&foto_perfil=FotoBV&id_refugio=2
+ -->
+      <ul>
+
+        <li>
+          <label> USERNAME: </label>
+          <input type="text" name="username" required />
+        </li>
+
+        <li>
+          <label> PASSWORD: </label>
+          <input type="password" name="password" required />
+        </li>
+
+      </ul>
+      <button type="submit">Iniciar sesion</button>
+    </form>
+  </div>
+
   </div>
   <script>
     document
-      .getElementById("registroForm")
+      .getElementById("iniciarSesionUsuarioForm")
       .addEventListener("submit", async function (event) {
         event.preventDefault(); // Evita que la página se recargue
 
         const formData = new FormData(this);
         const params = new URLSearchParams(formData).toString(); // Convierte los datos a formato URL
-        const url = `https://kuramadev.com/adopta_gatitos/Php/registrar_usuario.php?${params}`;
+        const url = `https://kuramadev.com/adopta_gatitos/Php/api/ciudadano/iniciar_sesion.php?${params}`;
 
-        //console.log("URL generada:", url); // Verifica que la URL sea correcta
+        console.log("URL generada:", url); // Verifica que la URL sea correcta
 
         try {
           const response = await fetch(url, { method: "GET", mode: "cors" });
@@ -44,7 +67,24 @@
           const text = await response.text();
 
           const result = JSON.parse(text); // Parsea manualmente para evitar errores
-          alert(result.success || result.error); // Muestra respuesta del servidor
+
+          console.log(result);
+          // Manejamos los tres posibles tipos de respuesta
+          /* if (result.Success) {
+            alert(result.Success);
+          } else if (result.Warning) {
+            alert("Advertencia: " + result.Warning);
+          } else if (result.Error) {
+            alert("Error: " + result.Error);
+          } else {
+            alert("Respuesta desconocida del servidor.");
+          } */
+          if (result.Error) {
+            alert("Error: " + result.Error);
+          }
+          /* else {
+
+          } */
         } catch (error) {
           console.error("Error al enviar el formulario", error);
           alert("Hubo un error al enviar los datos");

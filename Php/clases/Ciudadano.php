@@ -82,17 +82,19 @@ class Ciudadano
     public function Iniciar_Sesion()
     {
         $conexion = new Conexion();
-        $resultado_json = $conexion->IniciarSesion("Ciudadano", ["*"], "username", $this->username, $this->password);
+        $resultado = $conexion->IniciarSesion("Ciudadano", ["*"], "username", $this->username, $this->password);
         // Decodificar el JSON a un arreglo asociativo
-        $resultado = json_decode($resultado_json, true);
+        //$resultado = json_decode($resultado_json, true);
 
         // Verificar si contiene el campo 'Error'
-        if (isset($resultado['Error'])) {
-            echo json_encode($resultado); // o maneja el error como gustes
-        } else {
-            // Si no hay error, llenar los datos del ciudadano
+        if (!isset($resultado['Error']))
             $this->SetDatos($resultado[0]);
-        }
+
+        return $resultado; // o maneja el error como gustes
+        //} else {
+        // Si no hay error, llenar los datos del ciudadano
+        //$this->SetDatos($resultado[0]);
+        //}
     }
 
     public function Adoptar($tabla, $id_gato, $columna_actualizar, $condiciones)
@@ -104,4 +106,4 @@ class Ciudadano
 
 }
 
-?>/
+?>

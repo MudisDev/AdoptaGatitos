@@ -90,12 +90,12 @@ class Conexion
 
         if ($resultado) {
             if ($this->conn->affected_rows > 0) {
-                return["Success" => "DELETE en tabla $tabla exitoso"];
+                return ["Success" => "DELETE en tabla $tabla exitoso"];
             } else {
-                return["Warning" => "No se elimino ninguna fila en tabla $tabla"];
+                return ["Warning" => "No se elimino ninguna fila en tabla $tabla"];
             }
         } else {
-            return["Error" => "DELETE fallido en tabla $tabla"];
+            return ["Error" => "DELETE fallido en tabla $tabla"];
         }
     }
 
@@ -123,12 +123,12 @@ class Conexion
         $columnas = implode(", ", $columnas);
         $datos = implode(", ", $valores);
 
-/*         echo "tabla -> ", $tabla;
-        echo "<br>";
-        echo json_encode($columnas);
-        echo "<br>";
-        echo json_encode($datos);
-        echo "<br>"; */
+        /*         echo "tabla -> ", $tabla;
+                echo "<br>";
+                echo json_encode($columnas);
+                echo "<br>";
+                echo json_encode($datos);
+                echo "<br>"; */
 
         $this->sql = "INSERT INTO $tabla($columnas) VALUES($datos)";
 
@@ -139,10 +139,10 @@ class Conexion
             if ($this->conn->affected_rows > 0) {
                 return ["Success" => "Registro exitoso en tabla $tabla."];
             } else {
-                return["Warning" => "La consulta se ejecutó, pero no se insertó ninguna fila en $tabla."];
+                return ["Warning" => "La consulta se ejecutó, pero no se insertó ninguna fila en $tabla."];
             }
         } else {
-            return["Error" => "Registro fallido en tabla $tabla."];
+            return ["Error" => "Registro fallido en tabla $tabla."];
         }
     }
 
