@@ -27,8 +27,44 @@
 
 
 
-    <h3>Iniciar Sesion</h3>
-    <form id="iniciarSesionUsuarioForm" method="get">
+    <div id="loginForm"></div>
+
+
+    <div id="closeSession"></div>
+
+
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async function () {
+      //const params = new URLSearchParams(window.location.search);
+      /* const id_gato = params.get("id_gato"); // Obtiene el ID de la URL
+      console.log(`id_gato recibido => ${id_gato}`); */
+
+      const boolUser = authenticatedUser();
+
+
+      if (boolUser) {
+        document.getElementById("closeSession").innerHTML = '<h3>true</h3>  <button id="logoutBtn" type="button">Cerrar sesion</button>   ';
+
+        //document.getElementById("iniciarSesionUsuarioForm").style.display = "block";
+
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+          localStorage.removeItem("authenticated user");
+          //window.location.href = "login.html";
+          window.location.reload();
+          console.log("SESION CERRADA Bv");
+        });
+      }
+      else {
+        document.getElementById("closeSession").innerHTML = `<h4>FALSE</h4>   
+         `;
+        //document.getElementById("iniciarSesionUsuarioForm").style.display = "none";
+      }
+
+      if (!boolUser) {
+        document.getElementById("loginForm").innerHTML = `
+<form id="iniciarSesionUsuarioForm" method="get">
       <!-- nombre=EncargadoTest&username=enca21&email=encargado@gmail.com&password=Kazo&telefono=0123456789&foto_perfil=FotoBV&id_refugio=2
  -->
       <ul>
@@ -46,51 +82,43 @@
       </ul>
       <button type="submit">Iniciar sesion</button>
     </form>
-  </div>
 
-  </div>
-  <script>
-    document
-      .getElementById("iniciarSesionUsuarioForm")
-      .addEventListener("submit", async function (event) {
-        event.preventDefault(); // Evita que la página se recargue
+`;
 
-        const formData = new FormData(this);
-        const params = new URLSearchParams(formData).toString(); // Convierte los datos a formato URL
-        const url = `https://kuramadev.com/adopta_gatitos/Php/api/ciudadano/iniciar_sesion.php?${params}`;
+        // ✅ Ahora que ya existe, puedes agregarle el evento:
+        document
+          .getElementById("iniciarSesionUsuarioForm")
+          .addEventListener("submit", async function (event) {
+            event.preventDefault();
 
-        console.log("URL generada:", url); // Verifica que la URL sea correcta
+            const formData = new FormData(this);
+            const params = new URLSearchParams(formData).toString();
+            const url = `https://kuramadev.com/adopta_gatitos/Php/api/ciudadano/iniciar_sesion.php?${params}`;
 
-        try {
-          const response = await fetch(url, { method: "GET", mode: "cors" });
+            try {
+              const response = await fetch(url, { method: "GET", mode: "cors" });
+              const text = await response.text();
+              const result = JSON.parse(text);
 
-          const text = await response.text();
+              if (result.Error) {
+                alert("Error: " + result.Error);
+              } else {
+                localStorage.setItem("authenticated user", JSON.stringify(result));
+                window.location.reload();
+              }
+            } catch (error) {
+              console.error("Error al enviar el formulario", error);
+              alert("Hubo un error al enviar los datos");
+            }
+          });
 
-          const result = JSON.parse(text); // Parsea manualmente para evitar errores
+      }
 
-          console.log(result);
-          // Manejamos los tres posibles tipos de respuesta
-          /* if (result.Success) {
-            alert(result.Success);
-          } else if (result.Warning) {
-            alert("Advertencia: " + result.Warning);
-          } else if (result.Error) {
-            alert("Error: " + result.Error);
-          } else {
-            alert("Respuesta desconocida del servidor.");
-          } */
-          if (result.Error) {
-            alert("Error: " + result.Error);
-          }
-          /* else {
-
-          } */
-        } catch (error) {
-          console.error("Error al enviar el formulario", error);
-          alert("Hubo un error al enviar los datos");
-        }
-      });
+    });
   </script>
+
+  <script src="/Js/authenticatedUser.js"></script>
+
   <script src="Js/navbarScript.js"></script>
   </div>
 </body>
