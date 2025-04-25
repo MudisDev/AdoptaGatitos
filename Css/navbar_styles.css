@@ -1,0 +1,19 @@
+.navbar {
+    background-color: var(--secondary);
+  
+    display: flex;
+    justify-content: right;
+    gap: 10rem;
+  }
+  
+  .navbar__url {
+    font-size: 1.5rem;
+    font-family: var(--fuentePrincipal);
+  
+    color: var(--action);
+  
+    
+  }
+  .navbar__url:hover{
+    color: black;
+  }

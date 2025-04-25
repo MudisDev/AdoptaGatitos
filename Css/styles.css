@@ -81,25 +81,7 @@ h3 {
   background-color: #4a90e2;
 }
 
-.navbar {
-  background-color: var(--secondary);
 
-  display: flex;
-  justify-content: center;
-  gap: 10rem;
-}
-
-.navbar__url {
-  font-size: 2rem;
-  font-family: var(--fuentePrincipal);
-
-  color: var(--action);
-
-  
-}
-.navbar__url:hover{
-  color: black;
-}
 
 #datosContainer{
   display: grid;
