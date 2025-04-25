@@ -26,6 +26,9 @@
 
     <!--   <pre id="datosContainer" class="dataContainer"></pre> -->
     <div id="detalleGato"></div>
+
+    <div id="btnAdoptar"></div>
+
     <script>
         document.addEventListener("DOMContentLoaded", async function () {
             const params = new URLSearchParams(window.location.search);
@@ -60,6 +63,25 @@
         });
     </script>
     <script src="Js/navbarScript.js"></script>
+    <script src="Js/authenticatedUser.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function async() {
+            const boolUser = authenticatedUser();
+
+            if (boolUser) {
+                document.getElementById("btnAdoptar").innerHTML = `
+                <button id="adoptar" type="button">Adoptar</button> 
+                `;
+
+                document.getElementById("btnAdoptar").addEventListener("click", () => {
+                    //localStorage.removeItem("authenticated user");
+                    window.location.href = "index.html";
+                    //window.location.reload();
+                    //console.log("SESION CERRADA Bv");
+                });
+            }
+        })
+    </script>
 </body>
 <footer class="footer">
     <p class="footer__text">

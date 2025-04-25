@@ -18,7 +18,7 @@
 </header>
 
 <body class="contenedor">
-  
+
   <div id="navbarContainer"></div>
   <div id="mainContainer">
 
@@ -32,13 +32,18 @@
 
   </div>
 
-  <script>
+  <!-- <script > -->
+  <script type="module">
+    import { ciudadano_iniciar_sesion } from './Js/urlConfig.js';
+    import { authenticatedUser } from './Js/authenticatedUser.js';
     document.addEventListener("DOMContentLoaded", async function () {
       //const params = new URLSearchParams(window.location.search);
       /* const id_gato = params.get("id_gato"); // Obtiene el ID de la URL
       console.log(`id_gato recibido => ${id_gato}`); */
+      //import {ciudadano} from "Js/urlConfig.js";
 
       const boolUser = authenticatedUser();
+
 
 
       if (boolUser) {
@@ -90,6 +95,7 @@
 
             const formData = new FormData(this);
             const params = new URLSearchParams(formData).toString();
+            //const url = `${ciudadano_iniciar_sesion}?${params}`;
             const url = `https://kuramadev.com/adopta_gatitos/Php/api/ciudadano/iniciar_sesion.php?${params}`;
 
             try {
@@ -114,9 +120,8 @@
     });
   </script>
 
-  <script src="/Js/authenticatedUser.js"></script>
-
   <script src="Js/navbarScript.js"></script>
+
   </div>
 </body>
 <footer class="footer">

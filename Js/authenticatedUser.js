@@ -1,4 +1,4 @@
-function authenticatedUser() {
+export function authenticatedUser() {
   //window.addEventListener("DOMContentLoaded", () => {
   const user = JSON.parse(localStorage.getItem("authenticated user"));
 

@@ -2,8 +2,9 @@
     background-color: var(--secondary);
   
     display: flex;
-    justify-content: right;
+    justify-content: center;
     gap: 10rem;
+    margin-top: 2rem;
   }
   
   .navbar__url {
