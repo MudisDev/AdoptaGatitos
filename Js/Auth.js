@@ -1,4 +1,4 @@
-export function authenticatedUser() {
+/* export function authenticatedUser() {
   //window.addEventListener("DOMContentLoaded", () => {
   const user = JSON.parse(localStorage.getItem("authenticated user"));
 
@@ -19,3 +19,19 @@ export function authenticatedUser() {
 }
 
 //authenticatedUser();
+ */
+export const Auth = {
+  getUser: () => JSON.parse(localStorage.getItem("authenticated user")),
+  getAdmin: () => JSON.parse(localStorage.getItem("authenticated admin")),
+  isUserLoggedIn: () => !!localStorage.getItem("authenticated user"),
+  isAdminLoggedIn: () => !!localStorage.getItem("authenticated admin"),
+  isAnyoneLoggedIn: () => {
+    !!localStorage.getItem("authenticated user") ||
+      !!localStorage.getItem("authenticated admin");
+  },
+  logout: () => {
+    localStorage.removeItem("authenticated user");
+    localStorage.removeItem("authenticated admin");
+
+  },
+};

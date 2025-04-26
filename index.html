@@ -35,16 +35,14 @@
   <!-- <script > -->
   <script type="module">
     import { ciudadano_iniciar_sesion } from './Js/urlConfig.js';
-    import { authenticatedUser } from './Js/authenticatedUser.js';
+    import { Auth } from './Js/Auth.js';
     document.addEventListener("DOMContentLoaded", async function () {
       //const params = new URLSearchParams(window.location.search);
       /* const id_gato = params.get("id_gato"); // Obtiene el ID de la URL
       console.log(`id_gato recibido => ${id_gato}`); */
       //import {ciudadano} from "Js/urlConfig.js";
 
-      const boolUser = authenticatedUser();
-
-
+      const boolUser = Auth.isUserLoggedIn();
 
       if (boolUser) {
         document.getElementById("closeSession").innerHTML = '<h3>true</h3>  <button id="logoutBtn" type="button">Cerrar sesion</button>   ';
