@@ -24,7 +24,20 @@
     <p>Kakakakakaka</p>
     <div id="navbarContainer"></div>
     <div id="mainContainer">
-        <h3>registrar Usuario</h3>
+
+        <div id="formularioUsuario"></div>
+        <div id="formularioAdmin"></div>
+
+    </div>
+    <script type="module">
+        import { Auth } from './Js/Auth.js';
+
+        const userBool = Auth.isAnyoneLoggedIn();
+
+        if (!userBool) {
+            document.getElementById("formularioUsuario").innerHTML = `
+            
+            <h3>registrar Usuario</h3>
         <form id="registroUsuarioForm" method="get">
             <ul>
                 <li>
@@ -58,7 +71,47 @@
             </ul>
             <button type="submit">registrar</button>
         </form>
-        <h3>registrar Encargado</h3>
+            `;
+        }
+        else {
+            document.getElementById("formularioUsuario").innerHTML = `<h3>Necesitar cerrar sesion Bv</h3>`;
+        }
+
+
+
+        document
+            .getElementById("registroUsuarioForm")
+            .addEventListener("submit", async function (event) {
+                event.preventDefault(); // Evita que la página se recargue
+
+                const formData = new FormData(this);
+                const params = new URLSearchParams(formData).toString(); // Convierte los datos a formato URL
+                const url = `https://kuramadev.com/adopta_gatitos/Php/registrar_usuario.php?${params}`;
+
+                //console.log("URL generada:", url); // Verifica que la URL sea correcta
+
+                try {
+                    const response = await fetch(url, { method: "GET", mode: "cors" });
+
+                    const text = await response.text();
+
+                    const result = JSON.parse(text); // Parsea manualmente para evitar errores
+                    alert(result.success || result.error); // Muestra respuesta del servidor
+                } catch (error) {
+                    console.error("Error al enviar el formulario", error);
+                    alert("Hubo un error al enviar los datos");
+                }
+            });
+    </script>
+
+    <script type="module">
+        import { Auth } from './Js/Auth.js';
+
+
+        const adminBool = Auth.isAnyoneLoggedIn();
+
+        if (!adminBool) {
+            document.getElementById("formularioAdmin").innerHTML = `<h3>registrar Encargado</h3>
         <form id="registroEncargadoForm" method="get">
             <!-- nombre=EncargadoTest&username=enca21&email=encargado@gmail.com&password=Kazo&telefono=0123456789&foto_perfil=FotoBV&id_refugio=2
  -->
@@ -94,35 +147,15 @@
                 </li>
             </ul>
             <button type="submit">registrar</button>
-        </form>
-    </div>
-    <script>
-        document
-            .getElementById("registroUsuarioForm")
-            .addEventListener("submit", async function (event) {
-                event.preventDefault(); // Evita que la página se recargue
+        </form>`;
+        }
+        else {
+            document.getElementById("formularioAdmin").innerHTML = `<h3>Tambien cerrar como admin Bv</h3>`;
+        }
 
-                const formData = new FormData(this);
-                const params = new URLSearchParams(formData).toString(); // Convierte los datos a formato URL
-                const url = `https://kuramadev.com/adopta_gatitos/Php/registrar_usuario.php?${params}`;
 
-                //console.log("URL generada:", url); // Verifica que la URL sea correcta
 
-                try {
-                    const response = await fetch(url, { method: "GET", mode: "cors" });
 
-                    const text = await response.text();
-
-                    const result = JSON.parse(text); // Parsea manualmente para evitar errores
-                    alert(result.success || result.error); // Muestra respuesta del servidor
-                } catch (error) {
-                    console.error("Error al enviar el formulario", error);
-                    alert("Hubo un error al enviar los datos");
-                }
-            });
-    </script>
-
-    <script>
         document
             .getElementById("registroEncargadoForm")
             .addEventListener("submit", async function (event) {
@@ -158,8 +191,6 @@
     </script>
 
     <script src="/Js/authenticatedUser.js"></script>
-
-
 
     <script src="Js/navbarScript.js"></script>
     <script src="Js/footerScript.js"></script>
