@@ -30,6 +30,11 @@
     <div id="closeSession"></div>
 
 
+    <div id="adminLoginForm"></div>
+    <div id="adminCloseSession"></div>
+
+
+
   </div>
 
   <!-- <script > -->
@@ -94,8 +99,8 @@
 
             const formData = new FormData(this);
             const params = new URLSearchParams(formData).toString();
-            //const url = `${ciudadano_iniciar_sesion}?${params}`;
-            const url = `https://kuramadev.com/adopta_gatitos/Php/api/ciudadano/iniciar_sesion.php?${params}`;
+            const url = `${ciudadano_iniciar_sesion}?${params}`;
+            //const url = `https://kuramadev.com/adopta_gatitos/Php/api/ciudadano/iniciar_sesion.php?${params}`;
 
             try {
               const response = await fetch(url, { method: "GET", mode: "cors" });
@@ -119,6 +124,96 @@
 
     });
   </script>
+
+
+
+  <script type="module">
+    import { encargado_iniciar_sesion } from './Js/urlConfig.js';
+    import { Auth } from './Js/Auth.js';
+    document.addEventListener("DOMContentLoaded", async function () {
+      //const params = new URLSearchParams(window.location.search);
+      /* const id_gato = params.get("id_gato"); // Obtiene el ID de la URL
+      console.log(`id_gato recibido => ${id_gato}`); */
+      //import {ciudadano} from "Js/urlConfig.js";
+
+      const adminBool = Auth.isAdminLoggedIn();
+
+      if (adminBool) {
+        document.getElementById("adminCloseSession").innerHTML = '<h3>true</h3>  <button id="adminLogoutBtn" type="button">Cerrar sesion ADMIN</button>   ';
+
+        //document.getElementById("iniciarSesionUsuarioForm").style.display = "block";
+
+        document.getElementById("adminLogoutBtn").addEventListener("click", () => {
+          //localStorage.removeItem("authenticated user");
+          const cerrarSesion = Auth.logout();
+          //window.location.href = "login.html";
+          window.location.reload();
+          console.log("sesion cerrada ADMIN Bv");
+        });
+      }
+      else {
+        document.getElementById("adminCloseSession").innerHTML = `<h4>SESION CERRADA ADMIN</h4>   
+       `;
+        //document.getElementById("iniciarSesionUsuarioForm").style.display = "none";
+      }
+
+      if (!adminBool) {
+        document.getElementById("adminLoginForm").innerHTML = `
+<form id="iniciarSesionAdminForm" method="get">
+    <!-- nombre=EncargadoTest&username=enca21&email=encargado@gmail.com&password=Kazo&telefono=0123456789&foto_perfil=FotoBV&id_refugio=2
+-->
+    <ul>
+
+      <li>
+        <label> USERNAME: </label>
+        <input type="text" name="username" required />
+      </li>
+
+      <li>
+        <label> PASSWORD: </label>
+        <input type="password" name="password" required />
+      </li>
+
+    </ul>
+    <button type="submit">Iniciar sesion</button>
+  </form>
+
+`;
+
+        // ✅ Ahora que ya existe, puedes agregarle el evento:
+        document
+          .getElementById("iniciarSesionAdminForm")
+          .addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            const params = new URLSearchParams(formData).toString();
+            //const url = `https://kuramadev.com/adopta_gatitos/Php/api/encargado/iniciar_sesion_encargado.php?${params}`;
+            const url = `${encargado_iniciar_sesion}?${params}`;
+
+            try {
+              const response = await fetch(url, { method: "GET", mode: "cors" });
+              const text = await response.text();
+              const result = JSON.parse(text);
+
+              if (result.Error) {
+                alert("Error: " + result.Error);
+              } else {
+                //localStorage.setItem("authenticated user", JSON.stringify(result));
+                const iniciarSesion = Auth.setAdmin(result);
+                window.location.reload();
+              }
+            } catch (error) {
+              console.error("Error al enviar el formulario", error);
+              alert("Hubo un error al enviar los datos");
+            }
+          });
+
+      }
+
+    });
+  </script>
+
 
   <script src="Js/navbarScript.js"></script>
   <script src="Js/footerScript.js"></script>

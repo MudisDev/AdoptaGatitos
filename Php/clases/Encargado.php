@@ -1,5 +1,7 @@
 <?php
 
+use PhpParser\Node\Expr\FuncCall;
+
 require_once "Conexion.php";
 class Encargado
 {
@@ -37,6 +39,32 @@ class Encargado
     public function Get_Perfil_Encargado()
     {
 
+    }
+
+    public function Iniciar_Sesion()
+    {
+        $conexion = new Conexion();
+        $resultado = $conexion->IniciarSesion("Encargado", ["*"], "username", $this->username, $this->password);
+        // Decodificar el JSON a un arreglo asociativo
+        //$resultado = json_decode($resultado_json, true);
+
+        // Verificar si contiene el campo 'Error'
+        if (!isset($resultado['Error']))
+            $this->SetDatos($resultado[0]);
+
+        return $resultado; // o maneja el error como gustes
+        //} else {
+        // Si no hay error, llenar los datos del ciudadano
+        //$this->SetDatos($resultado[0]);
+        //}
+    }
+
+    public function SetDatos(array $datos){
+        foreach ($datos as $key => $value){
+            if(property_exists($this, $key)){
+                $this->$key = $value;
+            }
+        }
     }
 }
 
