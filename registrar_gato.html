@@ -21,7 +21,18 @@
 
     <div id="navbarContainer"></div>
     <div id="mainContainer">
-        <h3>Registrar Gato</h3>
+
+        <div id="registerCatContainer"></div>
+
+    </div>
+    <script type="module">
+        import { Auth } from './Js/Auth.js';
+
+        const adminBool = Auth.isAdminLoggedIn();
+
+        if (adminBool) {
+            document.getElementById("registerCatContainer").innerHTML = `
+            <h3>Registrar Gato</h3>
         <form id="registroGatoForm" method="get">
             <ul>
                 <li>
@@ -75,8 +86,17 @@
             </ul>
             <button type="submit">registrar</button>
         </form>
-    </div>
-    <script>
+            `;
+
+
+        }
+
+        else {
+            document.getElementById("registerCatContainer").innerHTML = `<h3> solo los encargados poder registrar gatos Bv </h3>`;
+        }
+
+
+
         document
             .getElementById("registroGatoForm")
             .addEventListener("submit", async function (event) {
