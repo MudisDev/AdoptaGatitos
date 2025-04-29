@@ -50,7 +50,8 @@
         //document.getElementById("iniciarSesionUsuarioForm").style.display = "block";
 
         document.getElementById("logoutBtn").addEventListener("click", () => {
-          localStorage.removeItem("authenticated user");
+          //localStorage.removeItem("authenticated user");
+          const cerrarSesion = Auth.logout();
           //window.location.href = "login.html";
           window.location.reload();
           console.log("SESION CERRADA Bv");
@@ -104,7 +105,8 @@
               if (result.Error) {
                 alert("Error: " + result.Error);
               } else {
-                localStorage.setItem("authenticated user", JSON.stringify(result));
+                //localStorage.setItem("authenticated user", JSON.stringify(result));
+                const iniciarSesion = Auth.setUser(result);
                 window.location.reload();
               }
             } catch (error) {

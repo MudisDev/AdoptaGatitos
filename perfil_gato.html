@@ -64,9 +64,10 @@
     </script>
     <script src="Js/navbarScript.js"></script>
     <script src="Js/authenticatedUser.js"></script>
-    <script>
+    <script type="module">
+        import {Auth} from './Js/Auth.js';
         document.addEventListener("DOMContentLoaded", function async() {
-            const boolUser = authenticatedUser();
+            const boolUser = Auth.isUserLoggedIn();
 
             if (boolUser) {
                 document.getElementById("btnAdoptar").innerHTML = `
