@@ -5,3 +5,4 @@ export const ciudadano_iniciar_sesion = `${api_ciudadano}/iniciar_sesion.php`;
 
 export const api_encargado  = `${php_domain}/api/encargado`;
 export const encargado_iniciar_sesion = `${api_encargado}/iniciar_sesion_encargado.php`;
+export const encargado_registrar_gato = `${api_encargado}/registrar_gato.php`;

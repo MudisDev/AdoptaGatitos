@@ -19,8 +19,6 @@ class Gato
     private $id_raza = null;
     private $id_refugio = null;
 
-    private $array_insert = ["nombre", "genero", "foto", "fecha_ingreso", "descripcion", "estado", "edad", "color", "fecha_adopcion", "id_cartilla", "id_ciudadano", "id_personalidad", "id_raza", "id_refugio"];
-
     public function __construct( array $datos)
     {
         foreach($datos as $key => $value){
@@ -54,12 +52,6 @@ class Gato
         return $array;
     }
 
-    public function Registrar_Gato()
-    {
-        //echo "Entro a registrar_gato";
-        $registro = new Conexion();
-        $registro->SetInsert("Gato", $this->array_insert, [$this->nombre, $this->genero, $this->foto, $this->fecha_ingreso, $this->descripcion, $this->estado, $this->edad, $this->color, $this->fecha_adopcion, $this->id_cartilla, $this->id_ciudadano, $this->id_personalidad, $this->id_raza, $this->id_refugio]);
-    }
     public function Buscar_Gato()
     {
         $buscar = new Conexion();

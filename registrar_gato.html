@@ -27,6 +27,7 @@
     </div>
     <script type="module">
         import { Auth } from './Js/Auth.js';
+        import { encargado_registrar_gato } from './Js/urlConfig.js';
 
         const adminBool = Auth.isAdminLoggedIn();
 
@@ -104,7 +105,8 @@
 
                 const formData = new FormData(this);
                 const params = new URLSearchParams(formData).toString(); // Convierte los datos a formato URL
-                const url = `https://kuramadev.com/adopta_gatitos/Php/registrar_gato.php?${params}`;
+                //const url = `https://kuramadev.com/adopta_gatitos/Php/registrar_gato.php?${params}`;
+                const url = `${encargado_registrar_gato}?${params}`;
 
                 console.log("URL generada:", url); // Verifica que la URL sea correcta
 
@@ -114,7 +116,16 @@
                     const text = await response.text();
 
                     const result = JSON.parse(text); // Parsea manualmente para evitar errores
-                    alert(result.success || result.error); // Muestra respuesta del servidor
+
+                    if (result.Success) {
+                        alert(result.Success);
+                    } else if (result.Warning) {
+                        alert("Advertencia: " + result.Warning);
+                    } else if (result.Error) {
+                        alert("Error: " + result.Error);
+                    } else {
+                        alert("Respuesta desconocida del servidor.");
+                    }
                 } catch (error) {
                     console.error("Error al enviar el formulario", error);
                     alert("Hubo un error al enviar los datos");
