@@ -14,7 +14,7 @@ class Ciudadano
     private $genero = null;
     private $foto_perfil = null;
 
-    private $array_insert = ["nombre", "username", "email", "password", "fecha_registro", "telefono", "genero", "foto_perfil"];
+    private $array_insert = ["nombre", "username", "email", "password", /* "fecha_registro", */ "telefono", "genero", "foto_perfil"];
     private $funcion_fecha = "CURDATE()";
 
     public function __construct(array $datos)
@@ -38,22 +38,24 @@ class Ciudadano
     public function Registrar_Ciudadano()
     {
         $conexion = new Conexion();
-        $conexion->SetInsert(
+        $resultado = $conexion->SetInsert(
             "Ciudadano",
             $this->array_insert,
-
             [
                 $this->nombre,
                 $this->username,
                 $this->email,
                 $this->password,
-                $this->funcion_fecha,
+                /* $this->funcion_fecha, */
                 $this->telefono,
                 $this->genero,
                 $this->foto_perfil
             ]
 
         );
+
+        return $resultado;
+
     }
 
     public function Get_Perfil_Ciudadano()
@@ -71,6 +73,16 @@ class Ciudadano
         ];
         return $array;
     }
+
+    /*     id_ciudadano INT AUTO_INCREMENT PRIMARY KEY,
+        nombre VARCHAR(30) NOT NULL,
+        username VARCHAR(30) NOT NULL UNIQUE,
+        email VARCHAR(30) NOT NULL UNIQUE,
+        password VARCHAR(200) NOT NULL,
+        fecha_registro DATE NOT NULL,
+        telefono VARCHAR(10),
+        genero VARCHAR(20),
+        foto_perfil VARCHAR(200) */
 
 
     public function Borrar_Cuenta()

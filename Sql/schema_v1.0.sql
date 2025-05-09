@@ -1,4 +1,3 @@
--- Active: 1703272465031@@127.0.0.1@3306@adoptagatitos
 CREATE DATABASE AdoptaGatitos;
 
 USE AdoptaGatitos;
@@ -34,7 +33,7 @@ CREATE TABLE Ciudadano (
     username VARCHAR(30) NOT NULL UNIQUE,
     email VARCHAR(30) NOT NULL UNIQUE,
     password VARCHAR(200) NOT NULL,
-    fecha_registro DATE NOT NULL,
+    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
     telefono VARCHAR(10),
     genero VARCHAR(20),
     foto_perfil VARCHAR(200)
@@ -120,3 +119,5 @@ DROP TABLE raza;
 DROP TABLE refugio;
 DROP TABLE cartilla_salud;
 DROP TABLE ciudadano;
+
+DELETE FROM ciudadano;
