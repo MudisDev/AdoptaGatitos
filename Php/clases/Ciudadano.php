@@ -1,5 +1,6 @@
 <?php
 require_once 'Conexion.php';
+require_once 'Gato.php';
 
 class Ciudadano
 {
@@ -104,27 +105,34 @@ class Ciudadano
 
     public function Iniciar_Sesion()
     {
+        if (!$this->Username_Existe())
+            return ["Error" => "Credenciales incorrectas."];
+        $condiciones = "username = '$this->username'";
         $conexion = new Conexion();
-        $resultado = $conexion->IniciarSesion("Ciudadano", ["*"], "username", $this->username, $this->password);
-        // Decodificar el JSON a un arreglo asociativo
-        //$resultado = json_decode($resultado_json, true);
+        $resultado = $conexion->SetSelect("Ciudadano", ["*"], $condiciones, true, $this->password);
 
         // Verificar si contiene el campo 'Error'
         if (!isset($resultado['Error']))
             $this->SetDatos($resultado[0]);
 
-        return $resultado; // o maneja el error como gustes
-        //} else {
-        // Si no hay error, llenar los datos del ciudadano
-        //$this->SetDatos($resultado[0]);
-        //}
+        return $resultado;
+
     }
 
-    public function Adoptar($tabla, $id_gato, $columna_actualizar, $condiciones)
+    public function Adoptar($id_gato)
     {
-        $conexion = new Conexion();
-        $conexion->SetActualizarRelacion($tabla, $id_gato, $this->id_ciudadano, $columna_actualizar, $condiciones);
+        $gato = new Gato(['id_gato' => $id_gato]);
+        $resultado = $gato->Gato_Adoptado();
+        if ($resultado)
+            return ["Error" => "El gato ya ha sido adoptado"];
 
+        $tabla = "Gato";
+        $columas = "id_ciudadano = '$this->id_ciudadano', estado_adopcion = 'adoptado', fecha_adopcion = NOW() ";
+        $condiciones = "id_gato = '$id_gato'";
+
+        $conexion = new Conexion();
+        $resultado = $conexion->SetUpdate($tabla, $columas, $condiciones);
+        return $resultado;
     }
 
     public function Username_Existe()
@@ -133,8 +141,9 @@ class Ciudadano
         $conexion = new Conexion();
         $resultado = $conexion->SetSelect("Ciudadano", ["*"], $condiciones);
         $conexion->cerrarConexion();
-
-        return $resultado;
+        if (isset($resultado['Error']))
+            return false;
+        return true;
     }
     public function Email_Existe()
     {

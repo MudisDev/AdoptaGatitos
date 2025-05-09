@@ -126,3 +126,4 @@ DROP TABLE ciudadano;
 DELETE FROM ciudadano;
 
 SELECT * FROM ciudadano;
+SELECT * FROM gato;

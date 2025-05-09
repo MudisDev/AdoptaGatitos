@@ -19,16 +19,16 @@ class Gato
     private $id_raza = null;
     private $id_refugio = null;
 
-    public function __construct( array $datos)
+    public function __construct(array $datos)
     {
-        foreach($datos as $key => $value){
-            if(property_exists($this, $key)){
+        foreach ($datos as $key => $value) {
+            if (property_exists($this, $key)) {
                 $this->$key = $value;
             }
         }
     }
 
-    
+
 
     public function Get_Perfil_Gato()
     {
@@ -65,6 +65,18 @@ class Gato
 
 
     }
+
+    public function Gato_Adoptado()
+    {
+        $condiciones = "id_gato = '$this->id_gato' AND estado_adopcion = 'adoptado'";
+        $conexion = new Conexion;
+        $resultado = $conexion->SetSelect("Gato", ["*"], $condiciones);
+        if (isset($resultado["Error"]))
+            return false;
+        return true;
+
+    }
+
     public function Set_Datos(array $datos)
     {
         foreach ($datos as $key => $valor) {

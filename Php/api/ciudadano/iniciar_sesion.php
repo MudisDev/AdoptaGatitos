@@ -1,5 +1,5 @@
 <?php
-
+//require_once '../../utils/debug.php';
 require_once "../../utils/headers.php";
 require_once "../../clases/Ciudadano.php";
 

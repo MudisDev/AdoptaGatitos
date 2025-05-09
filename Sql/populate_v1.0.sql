@@ -44,9 +44,9 @@ INSERT INTO Cartilla_Salud (vacunas_aplicadas, estado_general, ultima_revision, 
 
 -- Poblar la tabla Gato con nuevos datos
 INSERT INTO Gato (nombre, genero, foto, fecha_ingreso_refugio, descripcion, estado_adopcion, edad, color, fecha_adopcion, id_cartilla, id_ciudadano, id_personalidad, id_raza, id_refugio) VALUES
-('Simba', 'Macho', 'simba.jpg', '2025-02-10', 'Juguetón y enérgico', 'En adopción', 1, 'Naranja', NULL, 1, NULL, 3, 2, 1),
-('Nina', 'Hembra', 'nina.jpg', '2025-02-12', 'Muy cariñosa y le gusta dormir en el regazo', 'En adopción', 4, 'Blanco', NULL, 2, NULL, 2, 1, 1),
-('Tom', 'Macho', 'tom.jpg', '2025-03-01', 'Curioso y astuto, siempre explorando', 'En adopción', 2, 'Gris con blanco', NULL, 3, NULL, 2, 3, 2);
+('Simba', 'Macho', 'simba.jpg', '2025-02-10', 'Juguetón y enérgico', 'Sin adoptar', 1, 'Naranja', NULL, 1, NULL, 3, 2, 1),
+('Nina', 'Hembra', 'nina.jpg', '2025-02-12', 'Muy cariñosa y le gusta dormir en el regazo', 'Sin adoptar', 4, 'Blanco', NULL, 2, NULL, 2, 1, 1),
+('Tom', 'Macho', 'tom.jpg', '2025-03-01', 'Curioso y astuto, siempre explorando', 'Sin adoptar', 2, 'Gris con blanco', NULL, 3, NULL, 2, 3, 2);
 
 -- Poblar la tabla Supervision con nuevos datos
 INSERT INTO Supervision (id_cartilla, id_encargado, fecha_supervision, comentarios_supervision) VALUES
