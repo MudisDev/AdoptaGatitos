@@ -22,6 +22,7 @@ CREATE TABLE Categoria_Producto (
 
 CREATE TABLE Refugio (
     id_refugio INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
     direccion VARCHAR(100) NOT NULL,
     telefono VARCHAR(10) NOT NULL,
     email VARCHAR(50) NOT NULL
@@ -46,8 +47,9 @@ CREATE TABLE Encargado (
     email VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(200) NOT NULL,
     telefono VARCHAR(10) NOT NULL,
+    genero VARCHAR(20),
     foto_perfil VARCHAR(200),
-    fecha_ingreso DATE NOT NULL,
+    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
     id_refugio INT NOT NULL,
     FOREIGN KEY (id_refugio) REFERENCES Refugio (id_refugio)
 );
@@ -57,7 +59,7 @@ CREATE TABLE Producto (
     descripcion VARCHAR(200) NOT NULL,
     caducidad DATE NOT NULL,
     cantidad INT NOT NULL,
-    fecha_donacion DATE NOT NULL,
+    fecha_donacion DATETIME DEFAULT CURRENT_TIMESTAMP,
     status_donacion VARCHAR(20) NOT NULL,
     id_ciudadano INT NOT NULL,
     id_categoria INT NOT NULL,
@@ -72,6 +74,7 @@ CREATE TABLE Cartilla_Salud (
     vacunas_aplicadas VARCHAR(100) NOT NULL,
     estado_general VARCHAR(40) NOT NULL,
     ultima_revision DATE NOT NULL,
+    fecha_asignacion_cartilla DATETIME DEFAULT CURRENT_TIMESTAMP,
     id_ciudadano INT DEFAULT NULL,
     FOREIGN KEY (id_ciudadano) REFERENCES Ciudadano (id_ciudadano)
 );
@@ -91,12 +94,12 @@ CREATE TABLE Gato (
     nombre VARCHAR(30) NOT NULL,
     genero VARCHAR(15) NOT NULL,
     foto VARCHAR(200) NOT NULL,
-    fecha_ingreso DATE NOT NULL,
+    fecha_ingreso_refugio DATE NOT NULL,
     descripcion VARCHAR(200) NOT NULL,
-    estado VARCHAR(20) NOT NULL,
+    estado_adopcion VARCHAR(20) NOT NULL,
     edad int NOT NULL,
     color VARCHAR(20) NOT NULL,
-    fecha_adopcion DATE DEFAULT NULL,
+    fecha_adopcion DATETIME DEFAULT NULL,
     id_cartilla INT DEFAULT NULL,
     id_ciudadano INT DEFAULT NULL,
     id_personalidad INT NOT NULL,
@@ -121,3 +124,5 @@ DROP TABLE cartilla_salud;
 DROP TABLE ciudadano;
 
 DELETE FROM ciudadano;
+
+SELECT * FROM ciudadano;
