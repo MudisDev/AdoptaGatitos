@@ -1,3 +1,4 @@
+-- Active: 1703272465031@@127.0.0.1@3306@adoptagatitos
 CREATE DATABASE AdoptaGatitos;
 
 USE AdoptaGatitos;
