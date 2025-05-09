@@ -37,6 +37,17 @@ class Ciudadano
 
     public function Registrar_Ciudadano()
     {
+
+        $username_existe = $this->Username_Existe();
+        if (!isset($username_existe['Error']))
+            return ["Error" => "Username ya existe."];
+        $email_existe = $this->Email_Existe();
+        if (!isset($email_existe['Error']))
+            return ["Error" => "Email ya existe."];
+        $telefono_existe = $this->Telefono_Existe();
+        if (!isset($telefono_existe['Error']))
+            return ["Error" => "Telefono ya existe."];
+
         $conexion = new Conexion();
         $resultado = $conexion->SetInsert(
             "Ciudadano",
@@ -114,6 +125,34 @@ class Ciudadano
         $conexion = new Conexion();
         $conexion->SetActualizarRelacion($tabla, $id_gato, $this->id_ciudadano, $columna_actualizar, $condiciones);
 
+    }
+
+    public function Username_Existe()
+    {
+        $condiciones = "username = '$this->username'";
+        $conexion = new Conexion();
+        $resultado = $conexion->SetSelect("Ciudadano", ["*"], $condiciones);
+        $conexion->cerrarConexion();
+
+        return $resultado;
+    }
+    public function Email_Existe()
+    {
+        $condiciones = "email = '$this->email'";
+        $conexion = new Conexion();
+        $resultado = $conexion->SetSelect("Ciudadano", ["*"], $condiciones);
+        $conexion->cerrarConexion();
+
+        return $resultado;
+    }
+    public function Telefono_Existe()
+    {
+        $condiciones = "telefono = '$this->telefono'";
+        $conexion = new Conexion();
+        $resultado = $conexion->SetSelect("Ciudadano", ["*"], $condiciones);
+        $conexion->cerrarConexion();
+
+        return $resultado;
     }
 
 }
