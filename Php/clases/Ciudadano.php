@@ -39,8 +39,8 @@ class Ciudadano
     public function Registrar_Ciudadano()
     {
 
-        $username_existe = $this->Username_Existe();
-        if (!isset($username_existe['Error']))
+        //$username_existe = $this->Username_Existe();
+        if ($this->Username_Existe())
             return ["Error" => "Username ya existe."];
         $email_existe = $this->Email_Existe();
         if (!isset($email_existe['Error']))
@@ -99,8 +99,10 @@ class Ciudadano
 
     public function Borrar_Cuenta()
     {
+        $condiciones = "id_ciudadano = '$this->id_ciudadano'";
         $conexion = new Conexion();
-        $conexion->SetDelete("Ciudadano", "username = ", $this->username);
+        $resultado = $conexion->SetDelete("Ciudadano", $condiciones);
+        return $resultado;
     }
 
     public function Iniciar_Sesion()
