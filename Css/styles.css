@@ -1,34 +1,63 @@
+/* ==========================================================
+🎨 VARIABLES GLOBALES
+========================================================== */
 :root {
-  --primary: #f5a623;
-  --secondary: #4a90e2;
-  --background: #ffffff;
-  --highlight: #7f8c8d; /* Para textos y detalles. */
-  --action: #e74c3c; /* Para botones y alertas. */
-  --fuentePrincipal: "Staatliches", cursive;
+  /* Colores principales */
+  --primary: #ffb347;
+  --secondary: #4b8bff;
+
+  /* Colores de fondo */
+  --background: #0f172a;
+  --surface: #1e293b;
+
+  /* Colores de texto */
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+
+  /* Estados */
+  --action: #e11d48;
+  --success: #22c55e;
+  --warning: #facc15;
+  --error: #ef4444;
+
+  /* Detalles */
+  --highlight: #334155;
+  --shadow: rgba(0, 0, 0, 0.3);
+
+  /* Tipografía */
+  --font-primary: "Staatliches", cursive;
+  --font-body: "Inter", sans-serif;
+
+  /* Espaciados */
+  --radius: 1rem;
+  --padding: 1.5rem;
+  --max-width: 120rem;
 }
 
+/* ==========================================================
+⚙️ CONFIGURACIÓN GLOBAL / RESETEO
+========================================================== */
 html {
   box-sizing: border-box;
   font-size: 62.5%;
 }
-*,
-*:before,
-*:after {
+
+*, *::before, *::after {
   box-sizing: inherit;
 }
 
-/*Globales*/
-
 body {
-  background-color: var(--primary);
+  background-color: var(--background);
+  font-family: var(--font-body);
   font-size: 1.6rem;
   line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0;
 }
 
+/* Elementos básicos */
 p {
   font-size: 1.8rem;
-  font-family: Arial, Helvetica, sans-serif;
-  color: var(--blanco);
 }
 
 a {
@@ -37,105 +66,117 @@ a {
 
 img {
   max-width: 100%;
+  display: block;
 }
 
-.contenedor {
-  max-width: 120rem;
-  margin: 0 auto;
-}
-
-h1,
-h2,
-h3 {
-  font-family: var(--fuentePrincipal);
-  color: (var(--blanco));
+/* Encabezados */
+h1, h2, h3 {
+  font-family: var(--font-primary);
+  color: var(--text-primary);
   text-align: center;
 }
 
-h1 {
-  font-size: 4rem;
-}
-h2 {
-  font-size: 3.2rem;
-}
+h1 { font-size: 4rem; }
+h2 { font-size: 3.2rem; }
+h3 { font-size: 2.4rem; }
 
-h3 {
-  font-size: 2.4rem;
-}
-
-/*header*/
-
-.header {
-  display: flex;
-  justify-content: center;
-}
-
-.header__logo {
-  margin: 3rem 0;
-}
-
+/* ==========================================================
+🧭 LAYOUT GENERAL
+========================================================== */
 #mainContainer {
-  /* width: 700px; */
-  align-items: center;
-  margin: auto;
-  background-color: #4a90e2;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--padding);
 }
 
-
-
-#datosContainer{
+#datosContainer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 5rem;
-  background-color: #ffffff;
+  background-color: #fff;
+  border-radius: var(--radius);
+  padding: var(--padding);
 }
 
-/* .dataContainer {
-  width: auto;
-  height: auto;
-  background-color: var(--action);
-} */
-
-.footer {
-  background-color: var(--primary);
-
-  height: 20px;
-}
-.footer__text {
-  text-align: center;
-}
-
-.gato-item {
-  color: black;
-  width: 50rem;
-  background-color: #4a90e2;
-  padding: 2rem;
+/* ==========================================================
+🔝 HEADER / NAVBAR
+========================================================== */
+.navbar {
+  background-color: var(--surface);
   display: flex;
-  flex-direction: column; /* Asegura que el contenido esté en columna */
+  justify-content: center;
+  align-items: center;
+  gap: 10rem;
+  height: 8rem;
+  box-shadow: 0 2px 10px var(--shadow);
+}
+
+.logo {
+  font-family: var(--font-primary);
+  font-size: 2.4rem;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.logo:hover {
+  color: var(--primary);
+}
+
+.navbar__links {
+  display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px; /* Opcional para mejor apariencia */
-  margin: auto; /* Centrar en la pantalla */
-  
-  
+  gap: 5rem;
 }
 
-.gato-item-container{
-  background-color: #e74c3c;
+.navbar__url {
+  font-size: 1.5rem;
+  font-family: var(--font-primary);
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.navbar__url:hover {
+  color: var(--secondary);
+}
+
+.navbar__url:active {
+  color: var(--primary);
+}
+
+/* ==========================================================
+🐱 COMPONENTES: GATO ITEM
+========================================================== */
+.gato-item {
+  background-color: var(--secondary);
+  width: 50rem;
+  padding: 2rem;
+  border-radius: var(--radius);
+  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%; /* Para que se ajuste al padre */
-  border-radius: 10px;
+}
+
+.gato-item-container {
+  background-color: var(--action);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: var(--radius);
   padding: 1.5rem;
 }
 
 .gato-item-foto {
   width: 20rem;
   height: 20rem;
-  object-fit: cover; /* Asegura que la imagen no se deforme */
-  border-radius: 10px;
+  object-fit: cover;
+  border-radius: var(--radius);
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -143,18 +184,19 @@ h3 {
   font-size: 1.8rem;
   text-align: center;
   margin: 0.5rem 0;
-  color: white; /* Para mejor contraste con el fondo */
+  color: white;
 }
 
+/* ==========================================================
+⬇️ FOOTER
+========================================================== */
+.footer {
+  background-color: var(--surface);
+  padding: 1rem;
+  text-align: center;
+}
 
-
-
-
-
-
-
-
-
-
-
-
+.footer__text {
+  color: var(--text-primary);
+  font-size: 1.4rem;
+}
