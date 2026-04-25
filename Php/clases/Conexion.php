@@ -1,5 +1,5 @@
 <?php
-require_once  __DIR__ . '/../config/credentials.php';
+require_once __DIR__ . '/../config/credentials.php';
 
 class Conexion
 {
@@ -49,6 +49,8 @@ class Conexion
             $this->sql .= " WHERE $condiciones";
         }
 
+
+
         $coincidenciaBusqueda = false;
 
         $resultados = [];
@@ -58,7 +60,8 @@ class Conexion
             while ($fila = $resultado->fetch_assoc()) {
 
                 if ($is_login) {
-                    if ($password == $fila['password']) {
+                    //if ($password == $fila['password']) {
+                    if (password_verify($password, $fila['password'])) {
                         $coincidenciaBusqueda = true;
                         $resultados[] = $fila; // Cada fila es un diccionario (asociativo)
                         break;
@@ -72,36 +75,18 @@ class Conexion
             }
         }
 
-        if ($coincidenciaBusqueda == false) {
+        // Si es login y no hubo coincidencia
+        if ($is_login && empty($resultados)) {
+            return ["Error" => "Contraseña incorrecta o usuario no encontrado"];
+        }
+
+        // Si es consulta normal y no hay resultados
+        if (!$is_login && empty($resultados)) {
             return ["Error" => "No hubo coincidencias"];
-        } else {
-            return $resultados;
         }
-    }
 
-    /* public function IniciarSesion(string $tabla, array $columnas = ['*'], $columna_usuario, $username, $password)
-    {
-        $cols = implode(", ", $columnas);
-        $username = $this->conn->real_escape_string($username); // para prevenir inyecciones básicas
-
-        $band = false;
-
-        $this->sql = "SELECT $cols FROM $tabla WHERE $columna_usuario = '$username'";
-        $resultados = [];
-        $resultado = $this->conn->query($this->sql);
-
-        if ($resultado && $resultado->num_rows > 0) {
-            while ($fila = $resultado->fetch_assoc()) {
-                if ($password == $fila['password']) {
-                    $band = true;
-                    $resultados[] = $fila; // Cada fila es un diccionario (asociativo)
-                }
-            }
-            if (!$band)
-                return ["Error" => "Credenciales incorrectas"];
-        }
         return $resultados;
-    } */
+    }
 
     public function SetDelete(string $tabla, string $condiciones/* , $id */)
     {
@@ -120,8 +105,13 @@ class Conexion
         }
     }
 
-    public function SetInsert(string $tabla, array $columnas, array $datos)
+    public function SetInsert(string $tabla, array $columnas, array $datos, bool $is_register = false)
     {
+
+        if ($is_register) {
+            $hashed_password = password_hash($datos[3], PASSWORD_DEFAULT);
+            $datos[3] = $hashed_password;
+        }
         //echo "Entro a set insert en conexion";
 
         $valores = [];
@@ -144,12 +134,6 @@ class Conexion
         $columnas = implode(", ", $columnas);
         $datos = implode(", ", $valores);
 
-        /*         echo "tabla -> ", $tabla;
-                echo "<br>";
-                echo json_encode($columnas);
-                echo "<br>";
-                echo json_encode($datos);
-                echo "<br>"; */
 
         $this->sql = "INSERT INTO $tabla($columnas) VALUES($datos)";
 
@@ -158,7 +142,11 @@ class Conexion
         $resultado = $this->conn->query($this->sql);
         if ($resultado) {
             if ($this->conn->affected_rows > 0) {
-                return ["Success" => "Registro exitoso en tabla $tabla."];
+
+                // Obtener el ID generado
+                $lastId = $this->conn->insert_id;
+
+                return ["Success" => "Registro exitoso en tabla $tabla.", "id_generado" => $lastId];
             } else {
                 return ["Warning" => "La consulta se ejecutó, pero no se insertó ninguna fila en $tabla."];
             }
@@ -167,27 +155,6 @@ class Conexion
         }
     }
 
-    /* public function SetActualizarRelacion($tabla, $id_primario, $id_foraneo, $columna_actualizar, $condiciones)
-    {
-        $this->sql = "UPDATE $tabla SET $columna_actualizar = '$id_foraneo' WHERE $condiciones '$id_primario'";
-
-        $resultado = $this->conn->query($this->sql);
-
-        if ($resultado) {
-            if ($this->conn->affected_rows > 0) {
-                return ["Success" => "Update exitoso en tabla $tabla."];
-            } else {
-                return ["Warning" => "La consulta se ejecutó, pero no se actualizo ninguna fila en $tabla."];
-            }
-        } else {
-            return [
-                "error" => "Update fallido en tabla $tabla.",
-                "sql" => $this->sql,
-                "mysql_error" => $this->conn->error
-            ];
-        }
-
-    } */
     public function SetUpdate($tabla, $columnas_actualizar, $condiciones, )
     {
         $this->sql = "UPDATE $tabla SET $columnas_actualizar WHERE $condiciones";
@@ -202,13 +169,42 @@ class Conexion
             }
         } else {
             return [
-                "error" => "Update fallido en tabla $tabla.",
-                "sql" => $this->sql,
-                "mysql_error" => $this->conn->error
+                "Error" => "Update fallido en tabla $tabla.",
+                "Sql" => $this->sql,
+                "Mysql_error" => $this->conn->error
             ];
         }
 
     }
-}
 
+    public function SetCount(string $tabla, string $condiciones = '')
+    {
+        $this->sql = "SELECT COUNT(*) AS total FROM $tabla";
+
+        if (!empty($condiciones)) {
+            $this->sql .= " WHERE $condiciones";
+        }
+
+        $resultado = $this->conn->query($this->sql);
+
+        if ($resultado) {
+            return $resultado->fetch_assoc();
+        }
+
+        return ["Error" => "No se pudo obtener el conteo"];
+    }
+
+    public function BeginTransaction()
+    {
+        $this->conn->begin_transaction();
+    }
+    public function Commit()
+    {
+        $this->conn->commit();
+    }
+    public function Rollback()
+    {
+        $this->conn->rollback();
+    }
+}
 ?>
