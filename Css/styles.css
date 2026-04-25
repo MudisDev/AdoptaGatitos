@@ -149,9 +149,18 @@ h3 { font-size: 2.4rem; }
 /* ==========================================================
 🐱 COMPONENTES: GATO ITEM
 ========================================================== */
+
+#datosContainer{
+  background-color: var(--background);
+  display: grid;
+  /* grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
 .gato-item {
-  background-color: var(--secondary);
-  width: 50rem;
+  background-color: var(--surface);
+  width: 30rem;
   padding: 2rem;
   border-radius: var(--radius);
   margin: auto;
@@ -162,7 +171,7 @@ h3 { font-size: 2.4rem; }
 }
 
 .gato-item-container {
-  background-color: var(--action);
+  /* background-color: var(--action); */
   display: flex;
   flex-direction: column;
   align-items: center;
