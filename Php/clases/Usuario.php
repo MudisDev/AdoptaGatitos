@@ -1,6 +1,7 @@
 <?php
-require_once 'Conexion.php';
-require_once 'Mascota.php';
+require_once __DIR__ . '/Conexion.php';
+require_once __DIR__ . '/Mascota.php';
+
 
 class Usuario
 {
@@ -38,7 +39,6 @@ class Usuario
 
     public function Registrar_Usuario()
     {
-
         //$username_existe = $this->Username_Existe();
         if ($this->Username_Existe())
             return ["Error" => "Username ya existe."];
@@ -62,7 +62,7 @@ class Usuario
                 $this->telefono,
                 $this->genero,
                 $this->foto_perfil
-            ]
+            ],  true
 
         );
 
