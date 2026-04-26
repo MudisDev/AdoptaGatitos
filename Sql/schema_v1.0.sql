@@ -1,26 +1,26 @@
-CREATE DATABASE AdoptaGatitos;
+CREATE DATABASE adoptagatitos;
 
 USE AdoptaGatitos;
 
-CREATE TABLE Personalidad (
+CREATE TABLE personalidad (
     id_personalidad INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(30) NOT NULL,
     descripcion VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE Raza (
+CREATE TABLE raza (
     id_raza INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(30) NOT NULL,
     descripcion VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE Categoria_Producto (
+CREATE TABLE categoria_producto (
     id_categoria INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(30) NOT NULL,
     descripcion VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE Refugio (
+CREATE TABLE refugio (
     id_refugio INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     direccion VARCHAR(100) NOT NULL,
@@ -28,8 +28,8 @@ CREATE TABLE Refugio (
     email VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE Ciudadano (
-    id_ciudadano INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE usuario (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(30) NOT NULL,
     username VARCHAR(30) NOT NULL UNIQUE,
     email VARCHAR(30) NOT NULL UNIQUE,
@@ -40,7 +40,7 @@ CREATE TABLE Ciudadano (
     foto_perfil VARCHAR(200)
 );
 
-CREATE TABLE Encargado (
+CREATE TABLE encargado (
     id_encargado INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     username VARCHAR(30) NOT NULL UNIQUE,
@@ -51,46 +51,46 @@ CREATE TABLE Encargado (
     foto_perfil VARCHAR(200),
     fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
     id_refugio INT NOT NULL,
-    FOREIGN KEY (id_refugio) REFERENCES Refugio (id_refugio)
+    FOREIGN KEY (id_refugio) REFERENCES refugio (id_refugio)
 );
 
-CREATE TABLE Producto (
+CREATE TABLE producto (
     id_producto INT AUTO_INCREMENT PRIMARY KEY,
     descripcion VARCHAR(200) NOT NULL,
     caducidad DATE NOT NULL,
     cantidad INT NOT NULL,
     fecha_donacion DATETIME DEFAULT CURRENT_TIMESTAMP,
     status_donacion VARCHAR(20) NOT NULL,
-    id_ciudadano INT NOT NULL,
+    id_usuario INT NOT NULL,
     id_categoria INT NOT NULL,
     id_refugio INT NOT NULL,
-    FOREIGN KEY (id_ciudadano) REFERENCES Ciudadano (id_ciudadano),
-    FOREIGN KEY (id_categoria) REFERENCES Categoria_Producto (id_categoria),
-    FOREIGN KEY (id_refugio) REFERENCES Refugio (id_refugio)
+    FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario),
+    FOREIGN KEY (id_categoria) REFERENCES categoria_producto (id_categoria),
+    FOREIGN KEY (id_refugio) REFERENCES refugio (id_refugio)
 );
 
-CREATE TABLE Cartilla_Salud (
+CREATE TABLE cartilla_salud (
     id_cartilla INT AUTO_INCREMENT PRIMARY KEY,
     vacunas_aplicadas VARCHAR(100) NOT NULL,
     estado_general VARCHAR(40) NOT NULL,
     ultima_revision DATE NOT NULL,
     fecha_asignacion_cartilla DATETIME DEFAULT CURRENT_TIMESTAMP,
-    id_ciudadano INT DEFAULT NULL,
-    FOREIGN KEY (id_ciudadano) REFERENCES Ciudadano (id_ciudadano)
+    id_usuario INT DEFAULT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario)
 );
 
-CREATE TABLE Supervision (
+CREATE TABLE supervision (
     id_supervisa INT AUTO_INCREMENT PRIMARY KEY,
     id_cartilla INT NOT NULL,
     id_encargado INT NOT NULL,
     fecha_supervision DATE NOT NULL,
     comentarios_supervision VARCHAR(200) NOT NULL,
-    FOREIGN KEY (id_cartilla) REFERENCES Cartilla_Salud (id_cartilla),
-    FOREIGN KEY (id_encargado) REFERENCES Encargado (id_encargado)
+    FOREIGN KEY (id_cartilla) REFERENCES cartilla_salud (id_cartilla),
+    FOREIGN KEY (id_encargado) REFERENCES encargado (id_encargado)
 );
 
-CREATE TABLE Gato (
-    id_gato INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE mascota (
+    id_mascota INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(30) NOT NULL,
     genero VARCHAR(15) NOT NULL,
     foto VARCHAR(200) NOT NULL,
@@ -101,29 +101,29 @@ CREATE TABLE Gato (
     color VARCHAR(20) NOT NULL,
     fecha_adopcion DATETIME DEFAULT NULL,
     id_cartilla INT DEFAULT NULL,
-    id_ciudadano INT DEFAULT NULL,
+    id_usuario INT DEFAULT NULL,
     id_personalidad INT NOT NULL,
     id_raza INT NOT NULL,
     id_refugio INT NOT NULL,
-    FOREIGN KEY (id_cartilla) REFERENCES Cartilla_Salud (id_cartilla),
-    FOREIGN KEY (id_ciudadano) REFERENCES Ciudadano (id_ciudadano),
-    FOREIGN KEY (id_personalidad) REFERENCES Personalidad (id_personalidad),
-    FOREIGN KEY (id_raza) REFERENCES Raza (id_raza),
-    FOREIGN KEY (id_refugio) REFERENCES Refugio (id_refugio)
+    FOREIGN KEY (id_cartilla) REFERENCES cartilla_salud (id_cartilla),
+    FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario),
+    FOREIGN KEY (id_personalidad) REFERENCES personalidad (id_personalidad),
+    FOREIGN KEY (id_raza) REFERENCES raza (id_raza),
+    FOREIGN KEY (id_refugio) REFERENCES refugio (id_refugio)
 );
 
 DROP TABLE producto;
 DROP TABLE categoria_producto;
 DROP TABLE supervision;
 DROP TABLE encargado;
-DROP TABLE gato;
+DROP TABLE mascota;
 DROP TABLE personalidad;
 DROP TABLE raza;
 DROP TABLE refugio;
 DROP TABLE cartilla_salud;
-DROP TABLE ciudadano;
+DROP TABLE usuario;
 
-DELETE FROM ciudadano;
+DELETE FROM usuario;
 
-SELECT * FROM ciudadano;
-SELECT * FROM gato;
+SELECT * FROM usuario;
+SELECT * FROM mascota;
