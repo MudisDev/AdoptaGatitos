@@ -1,9 +1,9 @@
 <?php
 require_once 'Conexion.php';
-class Gato
+class Mascota
 {
 
-    private $id_gato = null;
+    private $id_mascota = null;
     private $nombre = null;
     private $genero = null;
     private $foto = null;
@@ -14,7 +14,7 @@ class Gato
     private $color = null;
     private $fecha_adopcion = null;
     private $id_cartilla = null;
-    private $id_ciudadano = null;
+    private $id_usuario = null;
     private $id_personalidad = null;
     private $id_raza = null;
     private $id_refugio = null;
@@ -30,10 +30,10 @@ class Gato
 
 
 
-    public function Get_Perfil_Gato()
+    public function Get_Perfil_Mascota()
     {
         $array = [
-            'id_gato' => $this->id_gato,
+            'id_mascota' => $this->id_mascota,
             'nombre' => $this->nombre,
             'genero' => $this->genero,
             'foto' => $this->foto,
@@ -44,7 +44,7 @@ class Gato
             'color' => $this->color,
             'fecha_adopcion' => $this->fecha_adopcion,
             'id_cartilla' => $this->id_cartilla,
-            'id_ciudadano' => $this->id_ciudadano,
+            'id_usuario' => $this->id_usuario,
             'id_personalidad' => $this->id_personalidad,
             'id_raza' => $this->id_raza,
             'id_refugio' => $this->id_refugio
@@ -52,10 +52,10 @@ class Gato
         return $array;
     }
 
-    public function Buscar_Gato()
+    public function Buscar_Mascota()
     {
         $buscar = new Conexion();
-        $resultado = $buscar->SetSelect("Gato", ['*'], "id_gato = $this->id_gato");
+        $resultado = $buscar->SetSelect("mascota", ['*'], "id_mascota = $this->id_mascota");
         //echo "<br><br>RESULTADOS<br><br>";
         //echo json_encode($resultado);
 
@@ -66,11 +66,11 @@ class Gato
 
     }
 
-    public function Gato_Adoptado()
+    public function Mascota_Adoptada()
     {
-        $condiciones = "id_gato = '$this->id_gato' AND estado_adopcion = 'adoptado'";
+        $condiciones = "id_mascota = '$this->id_mascota' AND estado_adopcion = 'adoptado'";
         $conexion = new Conexion;
-        $resultado = $conexion->SetSelect("Gato", ["*"], $condiciones);
+        $resultado = $conexion->SetSelect("mascota", ["*"], $condiciones);
         if (isset($resultado["Error"]))
             return false;
         return true;
@@ -87,9 +87,9 @@ class Gato
         }
     }
 
-    public function Get_Id_Gato()
+    public function Get_Id_Mascota()
     {
-        return $this->id_gato;
+        return $this->id_mascota;
     }
     public function Get_Id_Nombre()
     {
@@ -131,9 +131,9 @@ class Gato
     {
         return $this->id_cartilla;
     }
-    public function Get_Id_Ciudadano()
+    public function Get_Id_Usuario()
     {
-        return $this->id_ciudadano;
+        return $this->id_usuario;
     }
     public function Get_Personalidad()
     {

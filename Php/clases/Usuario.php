@@ -1,11 +1,11 @@
 <?php
 require_once 'Conexion.php';
-require_once 'Gato.php';
+require_once 'Mascota.php';
 
 class Ciudadano
 {
 
-    private $id_ciudadano = null;
+    private $id_usuario = null;
     private $nombre = null;
     private $username = null;
     private $email = null;
@@ -36,7 +36,7 @@ class Ciudadano
         }
     }
 
-    public function Registrar_Ciudadano()
+    public function Registrar_Usuario()
     {
 
         //$username_existe = $this->Username_Existe();
@@ -51,7 +51,7 @@ class Ciudadano
 
         $conexion = new Conexion();
         $resultado = $conexion->SetInsert(
-            "Ciudadano",
+            "usuario",
             $this->array_insert,
             [
                 $this->nombre,
@@ -70,10 +70,10 @@ class Ciudadano
 
     }
 
-    public function Get_Perfil_Ciudadano()
+    public function Get_Perfil_Usuario()
     {
         $array = [
-            $this->id_ciudadano,
+            $this->id_usuario,
             $this->nombre,
             $this->username,
             $this->email,
@@ -99,9 +99,9 @@ class Ciudadano
 
     public function Borrar_Cuenta()
     {
-        $condiciones = "id_ciudadano = '$this->id_ciudadano'";
+        $condiciones = "id_usuario = '$this->id_usuario'";
         $conexion = new Conexion();
-        $resultado = $conexion->SetDelete("Ciudadano", $condiciones);
+        $resultado = $conexion->SetDelete("usuario", $condiciones);
         return $resultado;
     }
 
@@ -111,7 +111,7 @@ class Ciudadano
             return ["Error" => "Credenciales incorrectas."];
         $condiciones = "username = '$this->username'";
         $conexion = new Conexion();
-        $resultado = $conexion->SetSelect("Ciudadano", ["*"], $condiciones, true, $this->password);
+        $resultado = $conexion->SetSelect("usuario", ["*"], $condiciones, true, $this->password);
 
         // Verificar si contiene el campo 'Error'
         if (!isset($resultado['Error']))
@@ -121,16 +121,16 @@ class Ciudadano
 
     }
 
-    public function Adoptar($id_gato)
+    public function Adoptar($id_mascota)
     {
-        $gato = new Gato(['id_gato' => $id_gato]);
-        $resultado = $gato->Gato_Adoptado();
+        $mascota = new Mascota(['id_mascota' => $id_mascota]);
+        $resultado = $mascota->Mascota_Adoptada();
         if ($resultado)
-            return ["Error" => "El gato ya ha sido adoptado"];
+            return ["Error" => "La mascota ya ha sido adoptado"];
 
-        $tabla = "Gato";
-        $columas = "id_ciudadano = '$this->id_ciudadano', estado_adopcion = 'adoptado', fecha_adopcion = NOW() ";
-        $condiciones = "id_gato = '$id_gato'";
+        $tabla = "mascota";
+        $columas = "id_usuario = '$this->id_usuario', estado_adopcion = 'adoptado', fecha_adopcion = NOW() ";
+        $condiciones = "id_mascota = '$id_mascota'";
 
         $conexion = new Conexion();
         $resultado = $conexion->SetUpdate($tabla, $columas, $condiciones);
@@ -141,7 +141,7 @@ class Ciudadano
     {
         $condiciones = "username = '$this->username'";
         $conexion = new Conexion();
-        $resultado = $conexion->SetSelect("Ciudadano", ["*"], $condiciones);
+        $resultado = $conexion->SetSelect("usuario", ["*"], $condiciones);
         $conexion->cerrarConexion();
         if (isset($resultado['Error']))
             return false;
@@ -151,7 +151,7 @@ class Ciudadano
     {
         $condiciones = "email = '$this->email'";
         $conexion = new Conexion();
-        $resultado = $conexion->SetSelect("Ciudadano", ["*"], $condiciones);
+        $resultado = $conexion->SetSelect("usuario", ["*"], $condiciones);
         $conexion->cerrarConexion();
 
         return $resultado;
@@ -160,7 +160,7 @@ class Ciudadano
     {
         $condiciones = "telefono = '$this->telefono'";
         $conexion = new Conexion();
-        $resultado = $conexion->SetSelect("Ciudadano", ["*"], $condiciones);
+        $resultado = $conexion->SetSelect("usuario", ["*"], $condiciones);
         $conexion->cerrarConexion();
 
         return $resultado;

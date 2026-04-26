@@ -18,7 +18,7 @@ class Encargado
 
     private $array_insert = ["nombre", "username", "email", "password", "telefono", "foto_perfil", "fecha_ingreso", "id_refugio"];
     private $funcion_fecha = "CURDATE()";
-    private $array_insert_gato = ["nombre", "genero", "foto", "fecha_ingreso", "descripcion", "estado", "edad", "color", "fecha_adopcion", "id_cartilla", "id_ciudadano", "id_personalidad", "id_raza", "id_refugio"];
+    private $array_insert_mascota = ["nombre", "genero", "foto", "fecha_ingreso", "descripcion", "estado", "edad", "color", "fecha_adopcion", "id_cartilla", "id_usuario", "id_personalidad", "id_raza", "id_refugio"];
 
 
     public function __construct(array $datos)
@@ -70,10 +70,10 @@ class Encargado
         }
     }
 
-    public function RegistrarGato(array $datos_gato)
+    public function RegistrarMascota(array $datos_mascota)
     {
         $conexion = new Conexion();
-        $resultado = $conexion->SetInsert("Gato", $this->array_insert_gato, $datos_gato);
+        $resultado = $conexion->SetInsert("mascota", $this->array_insert_mascota, $datos_mascota);
         return $resultado;
     }
 }

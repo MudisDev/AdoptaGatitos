@@ -1,7 +1,7 @@
 <?php
 
 require_once "Conexion.php";
-require_once "Gato.php";
+require_once "Mascota.php";
 class Lista
 {
 
@@ -17,10 +17,10 @@ class Lista
         return $this->array;
     }
 
-    public function Select_Gatos()
+    public function Select_Mascotas()
     {
         $conexion = new Conexion();
-        $resultados = $conexion->SetSelect("Gato", ["id_gato","nombre","genero","edad","foto"]);
+        $resultados = $conexion->SetSelect("mascota", ["id_mascota","nombre","genero","edad","foto"]);
         return $resultados;
     }
 
