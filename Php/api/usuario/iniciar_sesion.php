@@ -1,9 +1,9 @@
 <?php
-//require_once '../../utils/debug.php';
-require_once "../../utils/headers.php";
-require_once "../../clases/Ciudadano.php";
+require_once __DIR__ . '../../utils/debug.php';
+require_once __DIR__ . '../../utils/headers.php';
+require_once __DIR__ . '../../clases/Usuario.php';
 
-$ciudadano = new Ciudadano($_GET);
-$resultado = $ciudadano->Iniciar_Sesion();
+$usuario = new Usuario($_GET);
+$resultado = $usuario->Iniciar_Sesion();
 echo json_encode($resultado);
 ?>

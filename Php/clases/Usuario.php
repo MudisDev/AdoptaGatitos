@@ -2,7 +2,7 @@
 require_once 'Conexion.php';
 require_once 'Mascota.php';
 
-class Ciudadano
+class Usuario
 {
 
     private $id_usuario = null;

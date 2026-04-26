@@ -4,6 +4,7 @@ require_once __DIR__ . '../../utils/headers.php';
 require_once __DIR__ . '../../clases/Usuario.php';
 
 $usuario = new Usuario($_GET);
-$resultado = $usuario->Borrar_Cuenta();
+$resultado = $usuario->Registrar_Usuario();
+
 echo json_encode($resultado);
 ?>
