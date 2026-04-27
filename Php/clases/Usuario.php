@@ -17,6 +17,7 @@ class Usuario
     private $foto_perfil = null;
 
     private $array_insert = ["nombre", "username", "email", "password", /* "fecha_registro", */ "telefono", "genero", "foto_perfil"];
+    private $array_perfil = ["nombre", "username", "email", "fecha_registro", "telefono", "genero", "foto_perfil"];
     private $funcion_fecha = "CURDATE()";
 
     public function __construct(array $datos)
@@ -62,7 +63,8 @@ class Usuario
                 $this->telefono,
                 $this->genero,
                 $this->foto_perfil
-            ],  true
+            ],
+            true
 
         );
 
@@ -73,15 +75,13 @@ class Usuario
     public function Get_Perfil_Usuario()
     {
         $array = [
-            $this->id_usuario,
-            $this->nombre,
-            $this->username,
-            $this->email,
-            $this->password,
-            $this->fecha_registro,
-            $this->telefono,
-            $this->genero,
-            $this->foto_perfil
+            "nombre" => $this->nombre,
+            "username" => $this->username,
+            "email" => $this->email,
+            "fecha_registro" => $this->fecha_registro,
+            "telefono" => $this->telefono,
+            "genero" => $this->genero,
+            "foto_perfil" => $this->foto_perfil
         ];
         return $array;
     }
@@ -164,6 +164,14 @@ class Usuario
         $conexion->cerrarConexion();
 
         return $resultado;
+    }
+
+    public function Consultar_Perfil()
+    {
+        $condiciones = "id_usuario = '$this->id_usuario'";
+        $conexion = new Conexion();
+        $resultado = $conexion->SetSelect('usuario', $this->array_perfil, $condiciones);         
+        $this->SetDatos($resultado[0]);
     }
 
 }
