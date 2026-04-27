@@ -4,13 +4,13 @@ function requireLogin()
 {
     session_start();
 
-    if (!isset($_SESSION['id_ciudadano'])) {
+    if (!isset($_SESSION['id_usuario'])) {
         http_response_code(401);
         echo json_encode(["Error" => "No autenticado"]);
         exit;
     }
 
-    return $_SESSION['id_ciudadano'];
+    return $_SESSION['id_usuario'];
 }
 
 ?>
