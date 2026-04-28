@@ -1,20 +1,20 @@
 <?php
 
-require_once "Conexion.php";
-require_once "Mascota.php";
+require_once __DIR__ . '/Conexion.php';
+require_once __DIR__ . '/Mascota.php';
 class Lista
 {
 
-    private $array;
+    private $lista;
 
     public function __construct()
     {
 
     }
 
-    public function Get_Array()
+    public function Get_Lista()
     {
-        return $this->array;
+        return $this->lista;
     }
 
     public function Select_Mascotas()
