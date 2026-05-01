@@ -23,10 +23,8 @@
 </header>
 
 <body>
-
-
   <div id="navbarContainer"></div>
-  <main id="mainContainer">
+  <main>
 
     <h3>adoptar</h3>
 
@@ -36,13 +34,13 @@
 
 
     <script type="module">
-      import { mostrar_gatos } from '/Js/urlConfig.js';
+      import { mostrar_mascotas } from '/Js/urlConfig.js';
 
       document.addEventListener("DOMContentLoaded", async function () {
 
         try {
           //const response = await fetch(`http://192.168.18.2/adopta-gatitos/api/gato/mostrar_gatos.php`);
-          const response = await fetch(`${mostrar_gatos}`);
+          const response = await fetch(`${mostrar_mascotas}`);
           /* console.log(`Url -> ${mostrar_gatos}`); */
           const data = await response.json(); // Convertir la respuesta a JSON
 
@@ -76,7 +74,7 @@
             contenedor.appendChild(item);
             const boton = item.querySelector('button');
             boton.addEventListener('click', () => {
-              window.location.href = `perfil_gato.html?id_gato=${gato.id_gato}`;
+              window.location.href = `perfil_gato.html?id_mascota=${gato.id_mascota}`;
             });
           });
         } catch (error) {
@@ -93,8 +91,8 @@
     <script src="Js/footerScript.js"></script>
 
   </main>
+  <div id="footerContainer"></div>
 </body>
-<div id="footerContainer"></div>
 
 
 </html>
