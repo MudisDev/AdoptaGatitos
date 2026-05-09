@@ -3,8 +3,9 @@ require_once __DIR__ . '/../../utils/debug.php';
 require_once __DIR__ . '/../../utils/headers.php';
 require_once __DIR__ . '/../../clases/Conexion.php';
 require_once __DIR__ . '/../../clases/Usuario.php';
+require_once __DIR__ . '/../../utils/check_auth.php';
 
-$id_usuario = $_GET['id_usuario'];
+$id_usuario = requireLogin();
 $id_mascota = $_GET['id_mascota'];
 
 $usuario = new Usuario(['id_usuario' => $id_usuario]);

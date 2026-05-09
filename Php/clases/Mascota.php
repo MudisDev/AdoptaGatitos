@@ -9,7 +9,7 @@ class Mascota
     private $foto = null;
     private $fecha_ingreso = null;
     private $descripcion = null;
-    private $estado = null;
+    private $estado_adopcion = null;
     private $edad = null;
     private $color = null;
     private $fecha_adopcion = null;
@@ -39,7 +39,7 @@ class Mascota
             'foto' => $this->foto,
             'fecha_ingreso' => $this->fecha_ingreso,
             'descripcion' => $this->descripcion,
-            'estado' => $this->estado,
+            'estado_adopcion' => $this->estado_adopcion,
             'edad' => $this->edad,
             'color' => $this->color,
             'fecha_adopcion' => $this->fecha_adopcion,
@@ -111,9 +111,9 @@ class Mascota
     {
         return $this->descripcion;
     }
-    public function Get_Estado()
+    public function Get_Estado_Adopcion()
     {
-        return $this->estado;
+        return $this->estado_adopcion;
     }
     public function Get_Edad()
     {
