@@ -25,40 +25,40 @@
 <body>
   <div id="navbarContainer"></div>
   <main>
-
-    <h3>adoptar</h3>
-
-
-    <!--   <pre id="datosContainer" class="dataContainer"></pre> -->
-    <div id="datosContainer"></div>
+    <section id="seccion-principal">
+      <h3>adoptar</h3>
 
 
-    <script type="module">
-      import { mostrar_mascotas } from '/Js/urlConfig.js';
+      <!--   <pre id="datosContainer" class="dataContainer"></pre> -->
+      <div id="datosContainer"></div>
 
-      document.addEventListener("DOMContentLoaded", async function () {
 
-        try {
-          //const response = await fetch(`http://192.168.18.2/adopta-gatitos/api/gato/mostrar_gatos.php`);
-          const response = await fetch(`${mostrar_mascotas}`);
-          /* console.log(`Url -> ${mostrar_gatos}`); */
-          const data = await response.json(); // Convertir la respuesta a JSON
+      <script type="module">
+        import { mostrar_mascotas } from '/Js/urlConfig.js';
 
-          console.log("Datos recibidos:", data); // Para ver qué llega en la consola
+        document.addEventListener("DOMContentLoaded", async function () {
 
-          // Ejemplo: Mostrar los datos en la página
-          const contenedor = document.getElementById("datosContainer");
-          //contenedor.innerHTML = JSON.stringify(data, null, 2); // Mostrar JSON en pantalla
+          try {
+            //const response = await fetch(`http://192.168.18.2/adopta-gatitos/api/gato/mostrar_gatos.php`);
+            const response = await fetch(`${mostrar_mascotas}`);
+            /* console.log(`Url -> ${mostrar_gatos}`); */
+            const data = await response.json(); // Convertir la respuesta a JSON
 
-          data.forEach((gato) => {
-            const item = document.createElement("div");
-            item.classList.add("gato-item");
+            console.log("Datos recibidos:", data); // Para ver qué llega en la consola
 
-            // Determinar el icono según el género
-            const icono = gato.genero.toLowerCase() === "macho" ? "fas fa-mars" : "fas fa-venus";
-            const color = gato.genero.toLowerCase() === "macho" ? "color: blue;" : "color: pink;";
+            // Ejemplo: Mostrar los datos en la página
+            const contenedor = document.getElementById("datosContainer");
+            //contenedor.innerHTML = JSON.stringify(data, null, 2); // Mostrar JSON en pantalla
 
-            item.innerHTML = /*html*/ `
+            data.forEach((gato) => {
+              const item = document.createElement("div");
+              item.classList.add("gato-item");
+
+              // Determinar el icono según el género
+              const icono = gato.genero.toLowerCase() === "macho" ? "fas fa-mars" : "fas fa-venus";
+              const color = gato.genero.toLowerCase() === "macho" ? "color: blue;" : "color: pink;";
+
+              item.innerHTML = /*html*/ `
           <div class='gato-item-container'>
             <img class='gato-item-foto' src="${gato.foto}"> 
             <h3>${gato.nombre} </h3>
@@ -71,25 +71,25 @@
 
             `;
 
-            contenedor.appendChild(item);
-            const boton = item.querySelector('button');
-            boton.addEventListener('click', () => {
-              window.location.href = `perfil_gato.html?id_mascota=${gato.id_mascota}`;
+              contenedor.appendChild(item);
+              const boton = item.querySelector('button');
+              boton.addEventListener('click', () => {
+                window.location.href = `perfil_gato.html?id_mascota=${gato.id_mascota}`;
+              });
             });
-          });
-        } catch (error) {
-          console.error("Error al obtener datos:", error);
-        }
-      });
+          } catch (error) {
+            console.error("Error al obtener datos:", error);
+          }
+        });
 
-      /* function PerfilGato(id_gato) {
-        //window.location.href=`perfil_gato.html?id_gato=${id_gato}`;
-        window.location.href = `perfil_gato.html?id_gato=${id_gato}`;
-      } */
-    </script>
-    <script src="Js/navbarScript.js"></script>
-    <script src="Js/footerScript.js"></script>
-
+        /* function PerfilGato(id_gato) {
+          //window.location.href=`perfil_gato.html?id_gato=${id_gato}`;
+          window.location.href = `perfil_gato.html?id_gato=${id_gato}`;
+        } */
+      </script>
+      <script src="Js/navbarScript.js"></script>
+      <script src="Js/footerScript.js"></script>
+    </section>
   </main>
   <div id="footerContainer"></div>
 </body>

@@ -127,3 +127,4 @@ DELETE FROM usuario;
 
 SELECT * FROM usuario;
 SELECT * FROM mascota;
+

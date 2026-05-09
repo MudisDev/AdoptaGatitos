@@ -21,25 +21,72 @@
 
     <div id="navbarContainer"></div>
     <main>
+        <section id="seccion-principal">
+
+            <!--   <pre id="datosContainer" class="dataContainer"></pre> -->
+            <!-- <div id="detalleGato"></div>
+
+            <div id="btnAdoptar"></div> -->
+            <div id="perfil-mascota">
+                <template id="template-mascota-perfil">
+
+                    <div class="mascota-perfil-imagen">
+                        <img data-foto="foto">
+
+                    </div>
+                    <div class="mascota-perfil-datos">
+                        <p>Nombre: <span data-nombre="nombre"></span></p>
+                        <p>Genero: <span data-genero="genero"></span></p>
+                        <p>Descripcion: <span data-descripcion="descripcion"></span></p>
+                        <p>Color: <span data-color="color"></span></p>
+                        <p>Edad: <span data-edad="edad"></span></p>
+                        <p>Estado adopcion: <span data-estado="estado"></span></p>
+                        <p>Fecha adopcion: <span data-fecha_adopcion="fecha_adopcion"></span></p>
+                        <p>Fecha ingreso: <span data-fecha_ingreso="fecha_ingreso"></span></p>
+                        <p>Id cartilla: <span data-id_cartilla="id_cartilla"></span></p>
+                        <p>Id mascota: <span data-id_mascota="id_mascota"></span></p>
+                        <p>Id personalidad: <span data-id_personalidad="id_personalidad"></span></p>
+                        <p>Id raza: <span data-id_raza="id_raza"></span></p>
+                        <p>Id refugio: <span data-id_refugio="id_refugio"></span></p>
+                        <p>Id usuario adoptante: <span data-id_usuario="id_usuario"></span></p>
 
 
-        <!--   <pre id="datosContainer" class="dataContainer"></pre> -->
-        <div id="detalleGato"></div>
 
-        <div id="btnAdoptar"></div>
 
-        <script type="module">
-            import { perfil_mascota } from '/Js/urlConfig.js';
-            document.addEventListener("DOMContentLoaded", async function () {
-                const params = new URLSearchParams(window.location.search);
-                const id_gato = params.get("id_mascota"); // Obtiene el ID de la URL
-                console.log(`id_gato recibido => ${id_gato}`);
-                if (id_gato) {
-                    try {
-                        const response = await fetch(`${perfil_mascota}?id_mascota=${id_gato}`);
-                        const data = await response.json();
-                        console.log(data);
-                        document.getElementById("detalleGato").innerHTML = /*html*/ `
+                        <!--  <p>Edad: 1</p>
+
+                        <p>Descripción: Juguetón y enérgico</p>
+
+                        <p>Estado: null</p>
+
+                        <p>Fecha de ingreso: null</p>
+
+                        <p>Color: Naranja</p>
+
+                        <p>Fecha de adopcion: null</p>
+
+                        <p> Personalidad: 3</p>
+
+                        <p>Raza: 2</p>
+
+                        <p>Refugio: 1
+                        </p> -->
+                    </div>
+                </template>
+            </div>
+
+            <!--  <script type="module">
+                import { perfil_mascota } from '/Js/urlConfig.js';
+                document.addEventListener("DOMContentLoaded", async function () {
+                    const params = new URLSearchParams(window.location.search);
+                    const id_gato = params.get("id_mascota"); // Obtiene el ID de la URL
+                    console.log(`id_gato recibido => ${id_gato}`);
+                    if (id_gato) {
+                        try {
+                            const response = await fetch(`${perfil_mascota}?id_mascota=${id_gato}`);
+                            const data = await response.json();
+                            console.log(data);
+                            document.getElementById("detalleGato").innerHTML = /*html*/ `
           <h2>${data.nombre}</h2>
           <img src="${data.foto}" class="gato-item-foto">
           <p><strong>Género: </strong>${data.genero}</p>
@@ -54,37 +101,40 @@
           <p><strong>Refugio: </strong>${data.id_refugio}</p>
 
         `;
-                    } catch (error) {
-                        console.error("Error al obtener datos:", error);
+                        } catch (error) {
+                            console.error("Error al obtener datos:", error);
+                        }
+                    } else {
+                        document.getElementById("detalleGato").innerHTML = "<p>Error: No se encontró el gato.</p>";
                     }
-                } else {
-                    document.getElementById("detalleGato").innerHTML = "<p>Error: No se encontró el gato.</p>";
-                }
-            });
-        </script>
-        <script src="Js/navbarScript.js"></script>
-        <script src="Js/authenticatedUser.js"></script>
-        <script type="module">
-            import { Auth } from './Js/Auth.js';
-            document.addEventListener("DOMContentLoaded", function async() {
-                const boolUser = Auth.isUserLoggedIn();
+                });
+            </script>
+            <script src="Js/navbarScript.js"></script>
+            <script src="Js/authenticatedUser.js"></script>
+            <script type="module">
+                import { Auth } from './Js/Auth.js';
+                document.addEventListener("DOMContentLoaded", function async() {
+                    const boolUser = Auth.isUserLoggedIn();
 
-                if (boolUser) {
-                    document.getElementById("btnAdoptar").innerHTML = `
+                    if (boolUser) {
+                        document.getElementById("btnAdoptar").innerHTML = `
                 <button id="adoptar" type="button">Adoptar</button> 
                 `;
 
-                    document.getElementById("btnAdoptar").addEventListener("click", () => {
-                        //localStorage.removeItem("authenticated user");
-                        window.location.href = "index.html";
-                        //window.location.reload();
-                        //console.log("SESION CERRADA Bv");
-                    });
-                }
-            })
-        </script>
-        <script src="Js/footerScript.js"></script>
+                        document.getElementById("btnAdoptar").addEventListener("click", () => {
+                            //localStorage.removeItem("authenticated user");
+                            window.location.href = "index.html";
+                            //window.location.reload();
+                            //console.log("SESION CERRADA Bv");
+                        });
+                    }
+                })
+            </script> -->
+            <script type="module" src="Js/perfilMascotaScript.js"></script>
+            <script src="Js/navbarScript.js"></script>
+            <script src="Js/footerScript.js"></script>
 
+        </section>
     </main>
     <div id="footerContainer"></div>
 </body>

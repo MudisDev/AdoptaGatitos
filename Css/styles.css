@@ -63,9 +63,11 @@ body {
 
 main {
   flex: 1;
-  max-width: var(--max-width);
+  /* max-width: var(--max-width); */
+  width: 100%;
   margin: 0 auto;
-  padding: var(--padding);
+  /* padding: var(--padding); */
+  /* background-color: green; */
 }
 
 /* Elementos básicos */
@@ -99,6 +101,30 @@ h2 {
 }
 h3 {
   font-size: 2.4rem;
+}
+
+#hero {
+  /*  background-color: red; */
+  margin: 0;
+  width: 100%;
+  height: 35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#seccion-principal {
+  /* background-color: blue; */
+  width: var(--max-width);
+  margin: 0 auto;
+}
+
+#mascotas-recientes {
+  /* background-color: green; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 /* ==========================================================
@@ -224,4 +250,26 @@ h3 {
 .footer__text {
   color: var(--text-primary);
   font-size: 1.4rem;
+}
+
+
+/* #template-mascota-perfil{
+  display: flex;
+  justify-content: center;
+  background-color: red;
+} */
+
+#perfil-mascota{
+  background-color: green;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+.mascota-perfil-imagen{
+  flex: 1;
+}
+
+.mascota-perfil-datos{
+  flex: 2;
 }
