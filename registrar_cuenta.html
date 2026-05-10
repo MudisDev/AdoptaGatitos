@@ -22,172 +22,39 @@
     <div id="navbarContainer"></div>
     <main>
         <section id="seccion-principal">
-            <div id="formularioUsuario"></div>
-            <!-- <div id="formularioAdmin"></div> -->
+            <div id="contenedor-formulario">
+                <template id="formulario-registro-usuario">
+                    <p>Registrar Bv</p>
+
+                </template>
+
+                <template id="formulario-inicio-sesion-usuario">
+                    <form data-login-form>
+                        <h3>Iniciar Sesion</h3>
+                        <label>Usuario</label>
+                        <input type="text" placeholder="username" data-username>
+                        <br>
+                        <label>Contraseña</label>
+                        <input type="password" placeholder="password" data-password>
+                        <br>
+                        <button type="submit" data-button-form>Iniciar Sesion</button>
+                    </form>
+
+                </template>
+            </div>
+            <div id="contenedor-cerrar-sesion">
+                <template id="template-cerrar-sesion">
+                    <button data-boton-cerrar-sesion type="button">Cerrar Sesion</button>
+                </template>
+            </div>
         </section>
     </main>
-    <script type="module">
-        import { Auth } from './Js/Auth.js';
-
-        const userBool = Auth.isAnyoneLoggedIn();
-
-        if (!userBool) {
-            document.getElementById("formularioUsuario").innerHTML = `
-            
-            <h3>registrar Usuario</h3>
-        <form id="registroUsuarioForm" method="get">
-            <ul>
-                <li>
-                    <label> NOMBRE: </label>
-                    <input type="text" name="nombre" required />
-                </li>
-                <li>
-                    <label> USERNAME: </label>
-                    <input type="text" name="username" required />
-                </li>
-                <li>
-                    <label> EMAIL: </label>
-                    <input type="email" name="email" required />
-                </li>
-                <li>
-                    <label> PASSWORD: </label>
-                    <input type="password" name="password" required />
-                </li>
-                <li>
-                    <label> TELEFONO: </label>
-                    <input type="tel" name="telefono" required />
-                </li>
-                <li>
-                    <label> GENERO: </label>
-                    <input type="text" name="genero" required />
-                </li>
-                <li>
-                    <label> FOTO PERFIL: </label>
-                    <input type="text" name="foto_perfil" />
-                </li>
-            </ul>
-            <button type="submit">registrar</button>
-        </form>
-            `;
-        }
-        else {
-            document.getElementById("formularioUsuario").innerHTML = `<h3>Necesitar cerrar sesion Bv</h3>`;
-        }
 
 
 
-        document
-            .getElementById("registroUsuarioForm")
-            .addEventListener("submit", async function (event) {
-                event.preventDefault(); // Evita que la página se recargue
-
-                const formData = new FormData(this);
-                const params = new URLSearchParams(formData).toString(); // Convierte los datos a formato URL
-                const url = `https://kuramadev.com/adopta_gatitos/Php/registrar_usuario.php?${params}`;
-
-                //console.log("URL generada:", url); // Verifica que la URL sea correcta
-
-                try {
-                    const response = await fetch(url, { method: "GET", mode: "cors" });
-
-                    const text = await response.text();
-
-                    const result = JSON.parse(text); // Parsea manualmente para evitar errores
-                    alert(result.success || result.error); // Muestra respuesta del servidor
-                } catch (error) {
-                    console.error("Error al enviar el formulario", error);
-                    alert("Hubo un error al enviar los datos");
-                }
-            });
-    </script>
-
-    <script type="module">
-        import { Auth } from './Js/Auth.js';
-
-
-        const adminBool = Auth.isAnyoneLoggedIn();
-
-        if (!adminBool) {
-            document.getElementById("formularioAdmin").innerHTML = `<h3>registrar Encargado</h3>
-        <form id="registroEncargadoForm" method="get">
-            <!-- nombre=EncargadoTest&username=enca21&email=encargado@gmail.com&password=Kazo&telefono=0123456789&foto_perfil=FotoBV&id_refugio=2
- -->
-            <ul>
-                <li>
-                    <label> NOMBRE: </label>
-                    <input type="text" name="nombre" required />
-                </li>
-                <li>
-                    <label> USERNAME: </label>
-                    <input type="text" name="username" required />
-                </li>
-                <li>
-                    <label> EMAIL: </label>
-                    <input type="email" name="email" required />
-                </li>
-                <li>
-                    <label> PASSWORD: </label>
-                    <input type="password" name="password" required />
-                </li>
-                <li>
-                    <label> TELEFONO: </label>
-                    <input type="tel" name="telefono" required />
-                </li>
-
-                <li>
-                    <label> FOTO PERFIL: </label>
-                    <input type="text" name="foto_perfil" />
-                </li>
-                <li>
-                    <label> REFUGIO: </label>
-                    <input type="text" name="id_refugio" />
-                </li>
-            </ul>
-            <button type="submit">registrar</button>
-        </form>`;
-        }
-        else {
-            document.getElementById("formularioAdmin").innerHTML = `<h3>Tambien cerrar como admin Bv</h3>`;
-        }
-
-
-
-
-        document
-            .getElementById("registroEncargadoForm")
-            .addEventListener("submit", async function (event) {
-                event.preventDefault(); // Evita que la página se recargue
-
-                const formData = new FormData(this);
-                const params = new URLSearchParams(formData).toString(); // Convierte los datos a formato URL
-                const url = `https://kuramadev.com/adopta_gatitos/Php/api/encargado/registrar_encargado.php?${params}`;
-
-                console.log("URL generada:", url); // Verifica que la URL sea correcta
-
-                try {
-                    const response = await fetch(url, { method: "GET", mode: "cors" });
-
-                    const text = await response.text();
-
-                    const result = JSON.parse(text); // Parsea manualmente para evitar errores
-                    // Manejamos los tres posibles tipos de respuesta
-                    if (result.Success) {
-                        alert(result.Success);
-                    } else if (result.Warning) {
-                        alert("Advertencia: " + result.Warning);
-                    } else if (result.Error) {
-                        alert("Error: " + result.Error);
-                    } else {
-                        alert("Respuesta desconocida del servidor.");
-                    }
-                } catch (error) {
-                    console.error("Error al enviar el formulario", error);
-                    alert("Hubo un error al enviar los datos");
-                }
-            });
-    </script>
-
-    <script src="/Js/authenticatedUser.js"></script>
+    <script type="module" src="/Js/Auth.js"></script>
+    <!-- <script type="module" src="/Js/iniciarSesionUsuario.js"></script>
+    <script type="module" src="/Js/registrarUsuarioScript.js"></script> -->
 
     <script src="Js/navbarScript.js"></script>
     <script src="Js/footerScript.js"></script>

@@ -7,7 +7,7 @@ class Mascota
     private $nombre = null;
     private $genero = null;
     private $foto = null;
-    private $fecha_ingreso = null;
+    private $fecha_ingreso_refugio = null;
     private $descripcion = null;
     private $estado_adopcion = null;
     private $edad = null;
@@ -37,9 +37,9 @@ class Mascota
             'nombre' => $this->nombre,
             'genero' => $this->genero,
             'foto' => $this->foto,
-            'fecha_ingreso' => $this->fecha_ingreso,
             'descripcion' => $this->descripcion,
             'estado_adopcion' => $this->estado_adopcion,
+            'fecha_ingreso_refugio' => $this->fecha_ingreso_refugio,
             'edad' => $this->edad,
             'color' => $this->color,
             'fecha_adopcion' => $this->fecha_adopcion,
@@ -105,7 +105,7 @@ class Mascota
     }
     public function Get_Fecha_Ingreso()
     {
-        return $this->fecha_ingreso;
+        return $this->fecha_ingreso_refugio;
     }
     public function Get_Descripcion()
     {

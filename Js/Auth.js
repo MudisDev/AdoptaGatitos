@@ -1,18 +1,51 @@
-export const Auth = {
-  getUser: () => JSON.parse(localStorage.getItem("authenticated user")),
-  getAdmin: () => JSON.parse(localStorage.getItem("authenticated admin")),
-  setUser: (user) => localStorage.setItem("authenticated user", JSON.stringify(user)),
-  setAdmin: (admin) => localStorage.setItem("authenticated admin", JSON.stringify(admin)),
-  isUserLoggedIn: () => !!localStorage.getItem("authenticated user"),
-  isAdminLoggedIn: () => !!localStorage.getItem("authenticated admin"),
-  isAnyoneLoggedIn: () => {
-    return (
-      !!localStorage.getItem("authenticated user") ||
-      !!localStorage.getItem("authenticated admin")
-    );
-  },
-  logout: () => {
-    localStorage.removeItem("authenticated user");
-    localStorage.removeItem("authenticated admin");
-  },
-};
+import { LogOut } from "./cerrarSesionUsuario.js";
+import { FormLogin } from "./iniciarSesionUsuario.js";
+import { check_auth } from "/Js/urlConfig.js";
+
+document.addEventListener("DOMContentLoaded", async function () {
+  try {
+    const response = await fetch(check_auth, {
+      method: "GET",
+      credentials: "include",
+    });
+    const data = await response.json(); // Convertir la respuesta a JSON
+    console.log("Data de inicio de sesion ", data);
+
+    if (!data.Success) {
+      CargarFormularios();
+    } else {
+      CargarCerrarSesion();
+    }
+  } catch (error) {
+    console.error("Error al consultar inicio de sesion del usuario:", error);
+  }
+});
+
+function CargarFormularios() {
+  // Ejemplo: Mostrar los datos en la página
+  const container = document.getElementById("contenedor-formulario");
+  //contenedor.innerHTML = JSON.stringify(data, null, 2); // Mostrar JSON en pantalla
+
+  const templateLogin = document
+    .getElementById("formulario-inicio-sesion-usuario")
+    .content.cloneNode(true);
+  const templateRegister = document
+    .getElementById("formulario-registro-usuario")
+    .content.cloneNode(true);
+
+  container.appendChild(templateLogin);
+  container.appendChild(templateRegister);
+
+  FormLogin();
+}
+
+function CargarCerrarSesion() {
+  const container = document.getElementById("contenedor-cerrar-sesion");
+
+  const templateLogout = document
+    .getElementById("template-cerrar-sesion")
+    .content.cloneNode(true);
+
+  container.appendChild(templateLogout);
+  LogOut();
+}
