@@ -12,7 +12,8 @@ if (!isset($resultado['Error'])) {
     session_regenerate_id(true);
     $_SESSION['id_usuario'] = $resultado[0]["id_usuario"];
     //echo $resultado[0]["id_usuario"];
-    echo json_encode($resultado);
+    //echo json_encode($resultado);
+    echo json_encode(["Success" => "Sesion iniciada"]);
 
 } else
     echo json_encode($resultado);

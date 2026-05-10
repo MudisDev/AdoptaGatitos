@@ -23,10 +23,6 @@
     <main>
         <section id="seccion-principal">
             <div id="contenedor-formulario">
-                <template id="formulario-registro-usuario">
-                    <p>Registrar Bv</p>
-
-                </template>
 
                 <template id="formulario-inicio-sesion-usuario">
                     <form data-login-form>
@@ -37,7 +33,39 @@
                         <label>Contraseña</label>
                         <input type="password" placeholder="password" data-password>
                         <br>
-                        <button type="submit" data-button-form>Iniciar Sesion</button>
+                        <button type="submit" data-button-login-form>Iniciar Sesion</button>
+                    </form>
+
+                </template>
+
+
+
+                <template id="formulario-registro-usuario">
+
+                    <form data-register-form>
+                        <h3>Registrar Usuario</h3>
+                        <label>Nombre:</label>
+                        <input type="text" placeholder="nombre" data-nombre required>
+                        <br>
+                        <label>Username:</label>
+                        <input type="text" placeholder="username" data-username-register required>
+                        <br>
+                        <label>Email:</label>
+                        <input type="text" placeholder="email" data-email required>
+                        <br>
+                        <label>Password:</label>
+                        <input type="password" placeholder="password" data-password-register required>
+                        <br>
+                        <label>Telefono:</label>
+                        <input type="tel" placeholder="telefono" data-telefono>
+                        <br>
+                        <label>Genero:</label>
+                        <input type="text" placeholder="genero" data-genero>
+                        <br>
+                        <label>Foto perfil:</label>
+                        <input type="text" placeholder="foto perfil" data-foto-perfil>
+                        <br>
+                        <button type="submit" data-button-register-form>Registrar Cuenta</button>
                     </form>
 
                 </template>

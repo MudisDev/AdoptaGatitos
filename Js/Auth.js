@@ -1,5 +1,6 @@
 import { LogOut } from "./cerrarSesionUsuario.js";
 import { FormLogin } from "./iniciarSesionUsuario.js";
+import { FormRegister } from "./registrarUsuarioScript.js";
 import { check_auth } from "/Js/urlConfig.js";
 
 document.addEventListener("DOMContentLoaded", async function () {
@@ -37,6 +38,7 @@ function CargarFormularios() {
   container.appendChild(templateRegister);
 
   FormLogin();
+  FormRegister();
 }
 
 function CargarCerrarSesion() {
