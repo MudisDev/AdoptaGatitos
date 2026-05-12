@@ -27,15 +27,15 @@
             <!-- <div id="detalleGato"></div>
 
             <div id="btnAdoptar"></div> -->
-            <div id="perfil-mascota">
+            <!-- <div id="perfil-mascota">
                 <template id="template-mascota-perfil">
 
                     <div class="mascota-perfil-imagen">
                         <img data-foto="foto">
 
                     </div>
-                    <div class="mascota-perfil-datos">
-                        <p>Nombre: <span data-nombre></span></p>
+                    <div class="mascota-perfil-datos"> -->
+            <!-- <p>Nombre: <span data-nombre></span></p>
                         <p>Genero: <span data-genero></span></p>
                         <p>Descripcion: <span data-descripcion></span></p>
                         <p>Color: <span data-color></span></p>
@@ -48,27 +48,46 @@
                         <p>Id personalidad: <span data-id_personalidad></span></p>
                         <p>Id raza: <span data-id_raza></span></p>
                         <p>Id refugio: <span data-id_refugio></span></p>
-                        <p>Id usuario adoptante: <span data-id_usuario></span></p>
+                        <p>Id usuario adoptante: <span data-id_usuario></span></p> -->
 
 
-                        <!--  <p>Edad: 1</p>
+            <!-- 
+                    </div>
+                </template>
+            </div> -->
 
-                        <p>Descripción: Juguetón y enérgico</p>
 
-                        <p>Estado: null</p>
+            <div id="perfil-mascota">
+                <template id="template-mascota-perfil">
+                    <div class="perfil-card">
+                        <div class="perfil-imagen">
+                            <img data-foto="foto">
+                        </div>
 
-                        <p>Fecha de ingreso: null</p>
+                        <div class="perfil-info">
 
-                        <p>Color: Naranja</p>
+                            <h1 data-nombre></h1>
 
-                        <p>Fecha de adopcion: null</p>
+                            <div class="badges">
+                                <span data-genero></span>
+                                <span data-edad></span>
+                                <span data-color></span>
+                            </div>
 
-                        <p> Personalidad: 3</p>
+                            <p class="descripcion" data-descripcion></p>
 
-                        <p>Raza: 2</p>
+                            <div class="datos-extra">
+                                <p><strong>Raza:</strong> <span data-id_raza></span></p>
+                                <p><strong>Personalidad:</strong> <span data-id_personalidad></span></p>
+                                <p><strong>Refugio:</strong> <span data-id_refugio></span></p>
+                            </div>
 
-                        <p>Refugio: 1
-                        </p> -->
+                            <button class="btn-adoptar">
+                                Solicitar adopción
+                            </button>
+
+                        </div>
+
                     </div>
                 </template>
             </div>

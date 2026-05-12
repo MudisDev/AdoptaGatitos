@@ -107,10 +107,34 @@ h3 {
   /*  background-color: red; */
   margin: 0;
   width: 100%;
-  height: 35rem;
+  height: clamp(40rem, 50vh, 60rem);
+
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-image: url(../Imagenes/fondo-hero.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  /*   height: clamp(30rem, 50vh, 60rem); */
+  /*  height: clamp(20rem, 35vh, 40rem); */
+  /*   height: clamp(28rem, 45vh, 55rem); */
+}
+
+#hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.6)
+  );
+}
+
+#hero h2 {
+  font-style: italic;
 }
 
 #seccion-principal {
@@ -252,24 +276,680 @@ h3 {
   font-size: 1.4rem;
 }
 
-
 /* #template-mascota-perfil{
   display: flex;
   justify-content: center;
   background-color: red;
 } */
 
-#perfil-mascota{
+/* #perfil-mascota{
   background-color: green;
   display: flex;
   justify-content: center;
   height: 100vh;
-}
+} */
 
-.mascota-perfil-imagen{
+/* .mascota-perfil-imagen{
   flex: 1;
 }
 
 .mascota-perfil-datos{
   flex: 2;
+}
+ */
+
+/* ==========================================================
+🏠 HERO
+========================================================== */
+
+#hero {
+  width: 100%;
+  min-height: 55rem;
+
+  background-image: url(../Imagenes/fondo-hero.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.75));
+}
+
+.hero-overlay {
+  position: relative;
+  z-index: 2;
+
+  text-align: center;
+
+  width: min(90%, 80rem);
+}
+
+.hero-overlay h1 {
+  font-size: clamp(4rem, 7vw, 7rem);
+  margin-bottom: 2rem;
+}
+
+.hero-overlay p {
+  font-size: 2rem;
+  color: var(--text-primary);
+
+  margin-bottom: 3rem;
+}
+
+/* ==========================================================
+🎯 BOTONES
+========================================================== */
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 1.4rem 2.8rem;
+  border-radius: 999px;
+
+  font-family: var(--font-primary);
+  font-size: 1.8rem;
+
+  transition: 0.25s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: #000;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  opacity: 0.9;
+}
+
+.btn-secondary {
+  border: 2px solid var(--text-primary);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================
+📦 SECCION PRINCIPAL
+========================================================== */
+
+#seccion-principal {
+  width: min(95%, 120rem);
+  margin: 0 auto;
+
+  padding: 5rem 0;
+}
+
+/* ==========================================================
+✨ BENEFICIOS
+========================================================== */
+
+.beneficios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+
+  gap: 2rem;
+
+  margin-bottom: 6rem;
+}
+
+.beneficio-card {
+  background-color: var(--surface);
+
+  padding: 3rem;
+  border-radius: var(--radius);
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+
+  transition: 0.25s ease;
+}
+
+.beneficio-card:hover {
+  transform: translateY(-5px);
+}
+
+.beneficio-card h3 {
+  margin-bottom: 1.5rem;
+}
+
+.beneficio-card p {
+  color: var(--text-secondary);
+}
+
+/* ==========================================================
+🐱 GATOS RECIENTES
+========================================================== */
+
+#mascotas-recientes {
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: center;
+  gap: 2rem;
+
+  margin: 4rem 0 6rem 0;
+}
+
+.gato-item {
+  background-color: var(--surface);
+
+  width: 28rem;
+
+  border-radius: var(--radius);
+
+  overflow: hidden;
+
+  transition: 0.25s ease;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+}
+
+.gato-item:hover {
+  transform: translateY(-5px);
+}
+
+.gato-item-container {
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 1rem;
+}
+
+.gato-item-foto {
+  width: 100%;
+  height: 24rem;
+
+  object-fit: cover;
+
+  border-radius: var(--radius);
+}
+
+.gato-item button {
+  width: 100%;
+
+  border: none;
+
+  padding: 1.2rem;
+
+  border-radius: 999px;
+
+  background-color: var(--primary);
+
+  font-family: var(--font-primary);
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.gato-item button:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+/* ==========================================================
+📋 COMO FUNCIONA
+========================================================== */
+
+.como-funciona {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+
+  gap: 2rem;
+
+  margin-bottom: 6rem;
+}
+
+.paso {
+  background-color: var(--surface);
+
+  padding: 3rem 2rem;
+
+  border-radius: var(--radius);
+
+  text-align: center;
+
+  position: relative;
+}
+
+.paso span {
+  width: 5rem;
+  height: 5rem;
+
+  background-color: var(--primary);
+
+  color: black;
+
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0 auto 2rem auto;
+
+  font-family: var(--font-primary);
+  font-size: 2rem;
+}
+
+/* ==========================================================
+🚀 CTA FINAL
+========================================================== */
+
+.cta-final {
+  background: linear-gradient(135deg, var(--primary), #ff8c42);
+
+  padding: 5rem 3rem;
+
+  border-radius: var(--radius);
+
+  text-align: center;
+
+  color: black;
+}
+
+.cta-final h2 {
+  color: black;
+
+  margin-bottom: 2rem;
+}
+
+.cta-final p {
+  margin-bottom: 3rem;
+
+  font-size: 2rem;
+}
+
+/* ==========================================================
+📱 RESPONSIVE
+========================================================== */
+
+@media (max-width: 768px) {
+  .hero-overlay h1 {
+    font-size: 4.5rem;
+  }
+
+  .hero-overlay p {
+    font-size: 1.8rem;
+  }
+
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 2rem;
+    gap: 2rem;
+  }
+
+  .navbar__links {
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+}
+
+/* .perfil-card{
+  background-color: var(--surface);
+  border-radius: var(--radius);
+  padding: 3rem;
+
+  display: flex;
+  gap: 4rem;
+
+  max-width: 110rem;
+  margin: 4rem auto;
+} 
+.perfil-imagen img{
+  width: 35rem;
+  height: 35rem;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.perfil-info{
+  flex: 1;
+}
+
+.badges{
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0 2rem 0;
+}
+
+.badges span{
+  background-color: var(--highlight);
+  padding: .8rem 1.4rem;
+  border-radius: 999px;
+}
+ */
+
+/* ==========================================================
+🐱 PERFIL MASCOTA
+========================================================== */
+
+#perfil-mascota {
+  display: flex;
+  justify-content: center;
+
+  padding: 5rem 2rem;
+}
+
+.perfil-card {
+  background-color: var(--surface);
+
+  border-radius: var(--radius);
+
+  padding: 3rem;
+
+  display: flex;
+  gap: 4rem;
+
+  width: min(100%, 110rem);
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Imagen */
+
+.perfil-imagen {
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.perfil-imagen img {
+  width: 100%;
+  max-width: 35rem;
+
+  aspect-ratio: 1/1;
+
+  object-fit: cover;
+
+  border-radius: 2rem;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+/* Info */
+
+.perfil-info {
+  flex: 1.5;
+}
+
+.perfil-info h1 {
+  text-align: left;
+
+  margin-bottom: 1rem;
+
+  font-size: 5rem;
+}
+
+/* Badges */
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 1rem;
+
+  margin-bottom: 2rem;
+}
+
+.badges span {
+  background-color: var(--highlight);
+
+  color: var(--text-primary);
+
+  padding: 0.8rem 1.5rem;
+
+  border-radius: 999px;
+
+  font-size: 1.4rem;
+
+  font-weight: bold;
+}
+
+/* Descripcion */
+
+.descripcion {
+  font-size: 1.8rem;
+
+  line-height: 1.8;
+
+  margin-bottom: 3rem;
+}
+
+/* Datos extra */
+
+.datos-extra {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+
+  gap: 1.5rem;
+
+  margin-bottom: 3rem;
+}
+
+.datos-extra p {
+  background-color: rgba(255, 255, 255, 0.03);
+
+  padding: 1.5rem;
+
+  border-radius: 1rem;
+
+  margin: 0;
+}
+
+/* Boton */
+
+.btn-adoptar {
+  background-color: var(--primary);
+
+  color: black;
+
+  border: none;
+
+  padding: 1.5rem 3rem;
+
+  border-radius: 999px;
+
+  font-family: var(--font-primary);
+
+  font-size: 2rem;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.btn-adoptar:hover {
+  transform: translateY(-3px);
+
+  opacity: 0.9;
+}
+
+/* ==========================================================
+📱 RESPONSIVE
+========================================================== */
+
+@media (max-width: 900px) {
+  .perfil-card {
+    flex-direction: column;
+  }
+
+  .perfil-info h1 {
+    text-align: center;
+  }
+
+  .badges {
+    justify-content: center;
+  }
+
+  .btn-adoptar {
+    width: 100%;
+  }
+}
+
+.auth-main {
+  min-height: 100vh;
+  padding: 4rem 2rem;
+}
+
+.auth-hero {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.auth-hero h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.auth-hero p {
+  font-size: 1.8rem;
+  color: #666;
+}
+
+.auth-section {
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+/* CONTENEDOR FORMS */
+
+.contenedor-formularios {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* CARD */
+
+.auth-card,
+.logout-card {
+  background: white;
+  width: 100%;
+  max-width: 45rem;
+  padding: 3rem;
+  border-radius: 2rem;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-card h2,
+.logout-card h2 {
+  font-size: 2.8rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.auth-card label {
+  margin-bottom: 0.8rem;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.auth-card h2, label {
+  color: #000;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 1.2rem;
+  margin-bottom: 2rem;
+
+  border-radius: 1rem;
+  border: 1px solid #ddd;
+
+  font-size: 1.5rem;
+}
+
+.auth-card input:focus {
+  outline: none;
+  border-color: #ffb347;
+  box-shadow: 0 0 0 3px rgba(255, 179, 71, 0.2);
+}
+
+/* BOTONES */
+
+.auth-card button,
+.logout-card button {
+  border: none;
+  padding: 1.3rem;
+  border-radius: 1rem;
+
+  background: #ffb347;
+  color: white;
+
+  font-size: 1.6rem;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.auth-card button:hover,
+.logout-card button:hover {
+  transform: translateY(-2px);
+  background: #ff9f1c;
+}
+
+/* LOGOUT */
+
+.contenedor-logout {
+  display: flex;
+  justify-content: center;
+}
+
+.logout-card {
+  text-align: center;
+}
+
+.logout-card p {
+  margin-bottom: 2rem;
+  color: #666;
+  font-size: 1.6rem;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .contenedor-formularios {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .auth-card {
+    max-width: 100%;
+  }
 }

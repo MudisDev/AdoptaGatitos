@@ -21,7 +21,90 @@
 
     <div id="navbarContainer"></div>
     <main>
-        <section id="seccion-principal">
+
+
+        <section id="seccion-principal" class="auth-section">
+
+            <div id="contenedor-formulario" class="contenedor-formularios">
+                <template id="formulario-inicio-sesion-usuario">
+
+                    <form class="auth-card" data-login-form>
+
+                        <h2>Iniciar Sesión</h2>
+
+                        <label>Usuario</label>
+                        <input type="text" placeholder="Tu username" data-username>
+
+                        <label>Contraseña</label>
+                        <input type="password" placeholder="••••••••" data-password>
+
+                        <button type="submit" data-button-login-form>
+                            Iniciar Sesión
+                        </button>
+
+                    </form>
+
+                </template>
+
+
+                <template id="formulario-registro-usuario">
+
+                    <form class="auth-card" data-register-form>
+
+                        <h2>Crear Cuenta</h2>
+
+                        <label>Nombre</label>
+                        <input type="text" placeholder="Tu nombre" data-nombre required>
+
+                        <label>Username</label>
+                        <input type="text" placeholder="Username" data-username-register required>
+
+                        <label>Email</label>
+                        <input type="email" placeholder="correo@email.com" data-email required>
+
+                        <label>Password</label>
+                        <input type="password" placeholder="••••••••" data-password-register required>
+
+                        <label>Teléfono</label>
+                        <input type="tel" placeholder="Teléfono" data-telefono>
+
+                        <label>Género</label>
+                        <input type="text" placeholder="Género" data-genero>
+
+                        <button type="submit" data-button-register-form>
+                            Crear Cuenta
+                        </button>
+
+                    </form>
+
+                </template>
+            </div>
+
+            <div id="contenedor-cerrar-sesion" class="contenedor-logout">
+
+
+                <template id="template-cerrar-sesion">
+
+                    <div class="logout-card">
+
+                        <h2>🐱 Sesión iniciada</h2>
+
+                        <p>Ya puedes publicar y administrar gatitos en adopción.</p>
+
+                        <button data-boton-cerrar-sesion type="button">
+                            Cerrar Sesión
+                        </button>
+
+                    </div>
+
+                </template>
+
+            </div>
+
+        </section>
+
+
+        <!-- <section id="seccion-principal">
             <div id="contenedor-formulario">
 
                 <template id="formulario-inicio-sesion-usuario">
@@ -75,7 +158,7 @@
                     <button data-boton-cerrar-sesion type="button">Cerrar Sesion</button>
                 </template>
             </div>
-        </section>
+        </section> -->
     </main>
 
 
